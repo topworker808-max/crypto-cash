@@ -18,10 +18,10 @@ interface FAQItemProps {
 
 function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-[#1a1f2e] rounded-xl shadow-sm overflow-hidden">
             <button
                 onClick={onClick}
-                className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-[#252b3b] transition-colors"
             >
                 <span className="font-medium text-gray-900 dark:text-white pr-4">{question}</span>
                 <motion.div
@@ -41,7 +41,7 @@ function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                     >
-                        <div className="px-5 pb-4 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-3">
+                        <div className="px-5 pb-4 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-[#333a4d] pt-3">
                             {answer}
                         </div>
                     </motion.div>

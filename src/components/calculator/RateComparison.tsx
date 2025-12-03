@@ -28,23 +28,23 @@ export function RateComparison({ cityConfig, amount, rate, dict }: RateCompariso
         .replace('{currency}', cityConfig.currency) || `Save +${savings.toLocaleString(undefined, { maximumFractionDigits: 0 })} ${cityConfig.currency}`;
 
     return (
-        <Card className="w-full bg-white border-none shadow-lg rounded-xl overflow-hidden mt-6">
+        <Card className="w-full bg-white dark:bg-[#1a1f2e] border-none shadow-lg rounded-xl overflow-hidden mt-6">
             <CardContent className="p-0">
-                <div className="p-4 bg-gray-50 border-b border-gray-100">
-                    <h3 className="text-gray-900 font-semibold text-center">{dict?.comparison.title || 'Compare Exchange Options'}</h3>
+                <div className="p-4 bg-gray-50 dark:bg-[#252b3b] border-b border-gray-100 dark:border-[#333a4d]">
+                    <h3 className="text-gray-900 dark:text-white font-semibold text-center">{dict?.comparison.title || 'Compare Exchange Options'}</h3>
                 </div>
 
-                <div className="divide-y divide-gray-100">
+                <div className="divide-y divide-gray-100 dark:divide-[#333a4d]">
                     {/* Bank Row */}
                     <div className="flex items-center justify-between p-4 opacity-80">
                         <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center">
+                            <div className="w-8 h-8 rounded-full bg-red-50 dark:bg-red-500/20 flex items-center justify-center">
                                 <X className="w-4 h-4 text-red-500" />
                             </div>
-                            <div className="text-sm text-gray-600">{dict?.comparison.thaiBanks || 'Thai Banks'}</div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">{dict?.comparison.thaiBanks || 'Thai Banks'}</div>
                         </div>
                         <div className="text-right">
-                            <div className="text-gray-900 font-medium">
+                            <div className="text-gray-900 dark:text-white font-medium">
                                 {bankAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })} {cityConfig.currency}
                             </div>
                             <div className="text-xs text-red-500">-3%</div>
@@ -54,13 +54,13 @@ export function RateComparison({ cityConfig, amount, rate, dict }: RateCompariso
                     {/* ATM Row */}
                     <div className="flex items-center justify-between p-4 opacity-80">
                         <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center">
+                            <div className="w-8 h-8 rounded-full bg-red-50 dark:bg-red-500/20 flex items-center justify-center">
                                 <X className="w-4 h-4 text-red-500" />
                             </div>
-                            <div className="text-sm text-gray-600">{dict?.comparison.atmWithdrawal || 'ATM Withdrawal'}</div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">{dict?.comparison.atmWithdrawal || 'ATM Withdrawal'}</div>
                         </div>
                         <div className="text-right">
-                            <div className="text-gray-900 font-medium">
+                            <div className="text-gray-900 dark:text-white font-medium">
                                 {atmAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })} {cityConfig.currency}
                             </div>
                             <div className="text-xs text-red-500">-5% + 220 THB</div>
@@ -68,20 +68,20 @@ export function RateComparison({ cityConfig, amount, rate, dict }: RateCompariso
                     </div>
 
                     {/* CryptoCash Row (Highlighted) */}
-                    <div className="flex items-center justify-between p-4 bg-[#FFD528]/10 relative overflow-hidden">
+                    <div className="flex items-center justify-between p-4 bg-[#FFD528]/10 dark:bg-[#FFD528]/5 relative overflow-hidden">
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#FFD528]" />
                         <div className="flex items-center gap-3">
                             <div className="w-8 h-8 rounded-full bg-[#FFD528]/20 flex items-center justify-center">
                                 <Check className="w-4 h-4 text-[#C9A820]" />
                             </div>
-                            <div className="text-sm text-gray-900 font-bold">{dict?.comparison.cryptoCash || 'CryptoCash'}</div>
+                            <div className="text-sm text-gray-900 dark:text-white font-bold">{dict?.comparison.cryptoCash || 'CryptoCash'}</div>
                         </div>
                         <div className="text-right">
-                            <div className="text-gray-900 font-bold text-lg">
+                            <div className="text-gray-900 dark:text-white font-bold text-lg">
                                 {cryptoCashAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })} {cityConfig.currency}
                             </div>
                             {amount > 0 && (
-                                <div className="text-xs text-green-600 font-medium">
+                                <div className="text-xs text-green-600 dark:text-green-400 font-medium">
                                     {savingsText}
                                 </div>
                             )}

@@ -49,7 +49,7 @@ export function CityPageContent({ location, initialRate, initialRubRate = 0.38, 
             <HowToJsonLd dict={dict} lang={lang} />
             <FinancialCalculatorJsonLd lang={lang} />
 
-            <main className="flex min-h-screen flex-col items-center justify-start pt-6 p-4 pb-40 bg-[#E6E6E6] dark:bg-gray-900 text-gray-900 dark:text-gray-100 relative overflow-hidden transition-colors">
+            <main className="flex min-h-screen flex-col items-center justify-start pt-6 p-4 pb-40 bg-[#E6E6E6] dark:bg-[#0f1419] text-gray-900 dark:text-gray-100 relative overflow-hidden transition-colors">
                 <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -113,21 +113,21 @@ export function CityPageContent({ location, initialRate, initialRubRate = 0.38, 
                 <div className="pt-6 space-y-4 text-left">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white text-center">{dict.benefits.title}</h3>
                     <div className="grid grid-cols-1 gap-3">
-                        <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div className="flex items-start gap-3 p-4 bg-white dark:bg-[#1a1f2e] rounded-xl shadow-sm border border-gray-100 dark:border-[#333a4d]">
                             <TrendingUp className="w-5 h-5 text-green-600 mt-0.5" />
                             <div>
                                 <h4 className="text-sm font-medium text-gray-900 dark:text-white">{dict.benefits.betterRate.title}</h4>
                                 <p className="text-xs text-gray-500 dark:text-gray-400">{dict.benefits.betterRate.description}</p>
                             </div>
                         </div>
-                        <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div className="flex items-start gap-3 p-4 bg-white dark:bg-[#1a1f2e] rounded-xl shadow-sm border border-gray-100 dark:border-[#333a4d]">
                             <Wallet className="w-5 h-5 text-blue-600 mt-0.5" />
                             <div>
                                 <h4 className="text-sm font-medium text-gray-900 dark:text-white">{dict.benefits.noAtmFees.title}</h4>
                                 <p className="text-xs text-gray-500 dark:text-gray-400">{dict.benefits.noAtmFees.description}</p>
                             </div>
                         </div>
-                        <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div className="flex items-start gap-3 p-4 bg-white dark:bg-[#1a1f2e] rounded-xl shadow-sm border border-gray-100 dark:border-[#333a4d]">
                             <ShieldCheck className="w-5 h-5 text-purple-600 mt-0.5" />
                             <div>
                                 <h4 className="text-sm font-medium text-gray-900 dark:text-white">{dict.benefits.safeDelivery.title}</h4>
@@ -144,7 +144,7 @@ export function CityPageContent({ location, initialRate, initialRubRate = 0.38, 
                     </h3>
                     <div className="grid grid-cols-2 gap-3">
                         {/* ATM Card */}
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-center text-center">
+                        <div className="bg-white dark:bg-[#1a1f2e] rounded-xl p-4 shadow-sm border border-gray-100 dark:border-[#333a4d] flex flex-col items-center text-center">
                             <div className="w-16 h-16 mb-2 relative">
                                 <Image
                                     src="/images/atm.png"
@@ -163,7 +163,7 @@ export function CityPageContent({ location, initialRate, initialRubRate = 0.38, 
                         </div>
 
                         {/* Delivery Card */}
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-center text-center">
+                        <div className="bg-white dark:bg-[#1a1f2e] rounded-xl p-4 shadow-sm border border-gray-100 dark:border-[#333a4d] flex flex-col items-center text-center">
                             <div className="w-16 h-16 mb-2 relative">
                                 <Image
                                     src="/images/delivery.png"
@@ -182,7 +182,7 @@ export function CityPageContent({ location, initialRate, initialRubRate = 0.38, 
                         </div>
 
                         {/* Cash/Office Card */}
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-center text-center">
+                        <div className="bg-white dark:bg-[#1a1f2e] rounded-xl p-4 shadow-sm border border-gray-100 dark:border-[#333a4d] flex flex-col items-center text-center">
                             <div className="w-16 h-16 mb-2 relative">
                                 <Image
                                     src="/images/cash.png"
@@ -201,7 +201,7 @@ export function CityPageContent({ location, initialRate, initialRubRate = 0.38, 
                         </div>
 
                         {/* Bank Transfer Card */}
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-center text-center">
+                        <div className="bg-white dark:bg-[#1a1f2e] rounded-xl p-4 shadow-sm border border-gray-100 dark:border-[#333a4d] flex flex-col items-center text-center">
                             <div className="w-16 h-16 mb-2 relative">
                                 <Image
                                     src="/images/bank.png"

@@ -138,18 +138,18 @@ export function Calculator({
 
     return (
         <div className="space-y-4 w-full max-w-md mx-auto">
-            <Card className="w-full bg-white border-none shadow-lg rounded-xl overflow-hidden">
+            <Card className="w-full bg-white dark:bg-[#1a1f2e] border-none shadow-lg rounded-xl overflow-hidden">
                 <CardContent className="p-0">
                     {/* Currency Switcher */}
                     <div className="p-4 pb-0">
-                        <div className="flex bg-gray-100 rounded-xl p-1">
+                        <div className="flex bg-gray-100 dark:bg-[#252b3b] rounded-xl p-1">
                             <button
                                 type="button"
                                 onClick={() => handleCurrencySwitch('USDT')}
                                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all ${
                                     currentCurrency === 'USDT'
-                                        ? 'bg-white text-gray-900 shadow-sm'
-                                        : 'text-gray-500 hover:text-gray-700'
+                                        ? 'bg-white dark:bg-[#1a1f2e] text-gray-900 dark:text-white shadow-sm'
+                                        : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                                 }`}
                             >
                                 <span className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center text-xs">₮</span>
@@ -160,8 +160,8 @@ export function Calculator({
                                 onClick={() => handleCurrencySwitch('RUB')}
                                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all ${
                                     currentCurrency === 'RUB'
-                                        ? 'bg-white text-gray-900 shadow-sm'
-                                        : 'text-gray-500 hover:text-gray-700'
+                                        ? 'bg-white dark:bg-[#1a1f2e] text-gray-900 dark:text-white shadow-sm'
+                                        : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                                 }`}
                             >
                                 <RussiaFlag className="w-5 h-3.5 rounded-sm" />
@@ -172,28 +172,28 @@ export function Calculator({
 
                     {/* Top Input: You Send */}
                     <div className="p-5 pb-3 space-y-2 relative">
-                        <Label htmlFor="source-input" className="text-gray-500 text-sm font-medium ml-1">
+                        <Label htmlFor="source-input" className="text-gray-500 dark:text-gray-400 text-sm font-medium ml-1">
                             {dict?.calculator.youSend || 'You send'}
                         </Label>
-                        <div className="relative flex items-center bg-gray-100 rounded-xl border border-gray-200 focus-within:border-[#FFD528] focus-within:ring-2 focus-within:ring-[#FFD528]/20 transition-all">
+                        <div className="relative flex items-center bg-gray-100 dark:bg-[#252b3b] rounded-xl border border-gray-200 dark:border-[#333a4d] focus-within:border-[#FFD528] focus-within:ring-2 focus-within:ring-[#FFD528]/20 transition-all">
                             <Input
                                 id="source-input"
                                 type="number"
                                 placeholder="0"
                                 value={amount}
                                 onChange={handleSourceChange}
-                                className="text-3xl font-bold bg-transparent border-none focus:ring-0 h-14 text-gray-900 placeholder:text-gray-400 w-full pl-4 pr-24"
+                                className="text-3xl font-bold bg-transparent border-none focus:ring-0 h-14 text-gray-900 dark:text-white placeholder:text-gray-400 w-full pl-4 pr-24"
                             />
-                            <div className="absolute right-3 flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg shadow-sm">
+                            <div className="absolute right-3 flex items-center gap-2 bg-white dark:bg-[#1a1f2e] px-3 py-1.5 rounded-lg shadow-sm">
                                 {currentCurrency === 'USDT' ? (
                                     <>
                                         <span className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center text-xs">₮</span>
-                                        <span className="text-gray-900 font-bold text-sm">USDT</span>
+                                        <span className="text-gray-900 dark:text-white font-bold text-sm">USDT</span>
                                     </>
                                 ) : (
                                     <>
                                         <RussiaFlag className="w-5 h-3.5 rounded-sm" />
-                                        <span className="text-gray-900 font-bold text-sm">RUB</span>
+                                        <span className="text-gray-900 dark:text-white font-bold text-sm">RUB</span>
                                     </>
                                 )}
                             </div>
@@ -212,7 +212,7 @@ export function Calculator({
                                     className={`flex-1 py-1.5 px-2 text-sm font-medium rounded-lg transition-all ${
                                         amount === preset
                                             ? 'bg-[#FFD528] text-gray-900 shadow-sm'
-                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                            : 'bg-gray-100 dark:bg-[#252b3b] text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#333a4d]'
                                     }`}
                                 >
                                     {formatPreset(preset)}
@@ -224,17 +224,17 @@ export function Calculator({
                     {/* Toggle / Rate Divider */}
                     <div className="relative h-6 mx-5 flex items-center justify-center">
                         <div className="absolute inset-0 flex items-center">
-                            <div className="w-full h-px bg-gray-200" />
+                            <div className="w-full h-px bg-gray-200 dark:bg-[#333a4d]" />
                         </div>
-                        <div className="relative z-10 bg-white p-2 rounded-full border border-gray-200 shadow-sm">
-                            <ArrowUpDown className="w-4 h-4 text-gray-500" />
+                        <div className="relative z-10 bg-white dark:bg-[#252b3b] p-2 rounded-full border border-gray-200 dark:border-[#333a4d] shadow-sm">
+                            <ArrowUpDown className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                         </div>
-                        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1.5 bg-white px-2 py-0.5 rounded">
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1.5 bg-white dark:bg-[#1a1f2e] px-2 py-0.5 rounded">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                             </span>
-                            <span className="text-xs text-gray-600 font-medium">
+                            <span className="text-xs text-gray-600 dark:text-gray-300 font-medium">
                                 1 {currentCurrency} ≈ {currentRate.toFixed(2)} {cityConfig.currency}
                             </span>
                         </div>
@@ -242,21 +242,21 @@ export function Calculator({
 
                     {/* Bottom Input: You Receive */}
                     <div className="p-5 pt-3 space-y-2">
-                        <Label htmlFor="thb-input" className="text-gray-500 text-sm font-medium ml-1">
+                        <Label htmlFor="thb-input" className="text-gray-500 dark:text-gray-400 text-sm font-medium ml-1">
                             {dict?.calculator.youReceive || 'You receive'}
                         </Label>
-                        <div className="relative flex items-center bg-gray-100 rounded-xl border border-gray-200 focus-within:border-[#FFD528] focus-within:ring-2 focus-within:ring-[#FFD528]/20 transition-all">
+                        <div className="relative flex items-center bg-gray-100 dark:bg-[#252b3b] rounded-xl border border-gray-200 dark:border-[#333a4d] focus-within:border-[#FFD528] focus-within:ring-2 focus-within:ring-[#FFD528]/20 transition-all">
                             <Input
                                 id="thb-input"
                                 type="number"
                                 placeholder="0"
                                 value={receiveAmount}
                                 onChange={handleTHBChange}
-                                className="text-3xl font-bold bg-transparent border-none focus:ring-0 h-14 text-gray-900 placeholder:text-gray-400 w-full pl-4 pr-24"
+                                className="text-3xl font-bold bg-transparent border-none focus:ring-0 h-14 text-gray-900 dark:text-white placeholder:text-gray-400 w-full pl-4 pr-24"
                             />
-                            <div className="absolute right-3 flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg shadow-sm">
+                            <div className="absolute right-3 flex items-center gap-2 bg-white dark:bg-[#1a1f2e] px-3 py-1.5 rounded-lg shadow-sm">
                                 <ThailandFlag className="w-5 h-4 rounded-sm" />
-                                <span className="text-gray-900 font-bold text-sm">{cityConfig.currency}</span>
+                                <span className="text-gray-900 dark:text-white font-bold text-sm">{cityConfig.currency}</span>
                             </div>
                         </div>
                     </div>
@@ -265,7 +265,7 @@ export function Calculator({
                     <div className="px-5 pb-5">
                         <button
                             onClick={() => setIsDetailsOpen(!isDetailsOpen)}
-                            className="w-full flex items-center justify-between text-xs text-gray-500 hover:text-gray-700 transition-colors py-2"
+                            className="w-full flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors py-2"
                         >
                             <span className="flex items-center gap-1">
                                 <Info className="w-3 h-3" /> {dict?.calculator.showDetails || 'Transaction details'}
@@ -282,16 +282,16 @@ export function Calculator({
                                     className="space-y-2 pt-2 overflow-hidden"
                                 >
                                     <div className="flex justify-between text-sm">
-                                        <span className="text-gray-500">{dict?.calculator.serviceFee || 'Service Fee'}</span>
-                                        <span className="text-green-600 font-medium">{dict?.calculator.free || 'Free'}</span>
+                                        <span className="text-gray-500 dark:text-gray-400">{dict?.calculator.serviceFee || 'Service Fee'}</span>
+                                        <span className="text-green-600 dark:text-green-400 font-medium">{dict?.calculator.free || 'Free'}</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
-                                        <span className="text-gray-500">{dict?.calculator.delivery || 'Delivery'}</span>
-                                        <span className="text-gray-900 font-medium">{dict?.calculator.included || 'Included'}</span>
+                                        <span className="text-gray-500 dark:text-gray-400">{dict?.calculator.delivery || 'Delivery'}</span>
+                                        <span className="text-gray-900 dark:text-white font-medium">{dict?.calculator.included || 'Included'}</span>
                                     </div>
-                                    <div className="flex justify-between text-sm pt-2 border-t border-gray-200">
-                                        <span className="text-gray-500">{dict?.calculator.totalToPay || 'Total to Pay'}</span>
-                                        <span className="text-gray-900 font-bold">{amount || 0} {currentCurrency}</span>
+                                    <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-[#333a4d]">
+                                        <span className="text-gray-500 dark:text-gray-400">{dict?.calculator.totalToPay || 'Total to Pay'}</span>
+                                        <span className="text-gray-900 dark:text-white font-bold">{amount || 0} {currentCurrency}</span>
                                     </div>
                                 </motion.div>
                             )}

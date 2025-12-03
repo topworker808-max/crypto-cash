@@ -49,7 +49,7 @@ export function StickyActionBtn({ cityConfig, receiveAmount, sendAmount, sendCur
     }
 
     return (
-        <div className="fixed bottom-0 left-0 w-full z-50 p-4 bg-gradient-to-t from-[#E6E6E6] via-[#E6E6E6]/95 to-transparent dark:from-gray-900 dark:via-gray-900/95 pb-8">
+        <div className="fixed bottom-0 left-0 w-full z-50 p-4 bg-gradient-to-t from-[#E6E6E6] via-[#E6E6E6]/95 to-transparent dark:from-[#0f1419] dark:via-[#0f1419]/95 pb-8">
             <motion.div
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
