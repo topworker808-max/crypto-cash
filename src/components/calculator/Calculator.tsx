@@ -7,6 +7,7 @@ import { CityConfig } from "@/config/locations";
 import { ArrowUpDown, Check, Info } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import type { Dictionary } from "@/i18n/getDictionary";
 
 interface CalculatorProps {
     cityConfig: CityConfig;
@@ -15,9 +16,10 @@ interface CalculatorProps {
     onAmountChange: (val: number | "") => void;
     onReceiveAmountChange: (val: number | "") => void;
     rate: number;
+    dict?: Dictionary;
 }
 
-export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, onReceiveAmountChange, rate }: CalculatorProps) {
+export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, onReceiveAmountChange, rate, dict }: CalculatorProps) {
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
     const handleUSDTChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +56,7 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                 <CardContent className="p-0">
                     {/* Top Input: You Send */}
                     <div className="p-6 pb-4 space-y-2 relative">
-                        <Label htmlFor="usdt-input" className="text-gray-400 text-sm font-medium ml-1">You send</Label>
+                        <Label htmlFor="usdt-input" className="text-gray-400 text-sm font-medium ml-1">{dict?.calculator.youSend || 'You send'}</Label>
                         <div className="relative flex items-center bg-[#1A1F2B] rounded-2xl border border-transparent focus-within:border-white/20 transition-all">
                             <Input
                                 id="usdt-input"
@@ -92,7 +94,7 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
 
                     {/* Bottom Input: You Receive */}
                     <div className="p-6 pt-4 space-y-2">
-                        <Label htmlFor="thb-input" className="text-gray-400 text-sm font-medium ml-1">You receive</Label>
+                        <Label htmlFor="thb-input" className="text-gray-400 text-sm font-medium ml-1">{dict?.calculator.youReceive || 'You receive'}</Label>
                         <div className="relative flex items-center bg-[#1A1F2B] rounded-2xl border border-transparent focus-within:border-white/20 transition-all">
                             <Input
                                 id="thb-input"
@@ -115,8 +117,8 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                             onClick={() => setIsDetailsOpen(!isDetailsOpen)}
                             className="w-full flex items-center justify-between text-xs text-gray-500 hover:text-gray-300 transition-colors py-2"
                         >
-                            <span className="flex items-center gap-1"><Info className="w-3 h-3" /> Transaction details</span>
-                            <span>{isDetailsOpen ? "Hide" : "Show"}</span>
+                            <span className="flex items-center gap-1"><Info className="w-3 h-3" /> {dict?.calculator.showDetails || 'Transaction details'}</span>
+                            <span>{isDetailsOpen ? (dict?.calculator.hideDetails || "Hide") : (dict?.calculator.showDetails || "Show")}</span>
                         </button>
 
                         <AnimatePresence>
@@ -128,15 +130,15 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                                     className="space-y-2 pt-2 overflow-hidden"
                                 >
                                     <div className="flex justify-between text-sm">
-                                        <span className="text-gray-400">Service Fee</span>
-                                        <span className="text-green-400 font-medium">0 USDT</span>
+                                        <span className="text-gray-400">{dict?.calculator.serviceFee || 'Service Fee'}</span>
+                                        <span className="text-green-400 font-medium">{dict?.calculator.free || 'Free'}</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
-                                        <span className="text-gray-400">Delivery</span>
-                                        <span className="text-white font-medium">Included</span>
+                                        <span className="text-gray-400">{dict?.calculator.delivery || 'Delivery'}</span>
+                                        <span className="text-white font-medium">{dict?.calculator.included || 'Included'}</span>
                                     </div>
                                     <div className="flex justify-between text-sm pt-2 border-t border-white/5">
-                                        <span className="text-gray-400">Total to Pay</span>
+                                        <span className="text-gray-400">{dict?.calculator.totalToPay || 'Total to Pay'}</span>
                                         <span className="text-white font-bold">{amount || 0} USDT</span>
                                     </div>
                                 </motion.div>
@@ -149,9 +151,8 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
             <div className="flex flex-col items-center justify-center gap-1 text-xs text-gray-600">
                 <div className="flex items-center gap-2">
                     <Check className="w-3 h-3 text-green-500" />
-                    <span>Secured by Ex24.pro</span>
+                    <span>{dict?.footer.poweredBy || 'Rates powered by licensed partner'}</span>
                 </div>
-                <span className="text-[10px] text-gray-700">Indicative market rate. Final rate depends on volume.</span>
             </div>
         </div>
     );
