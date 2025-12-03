@@ -10,8 +10,6 @@ import { motion } from 'framer-motion';
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-background text-foreground relative overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-4xl w-full text-center space-y-12 relative z-10">
         <motion.div
@@ -21,9 +19,9 @@ export default function Home() {
           className="space-y-4"
         >
           <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight text-white drop-shadow-2xl">
-            Crypto<span className="text-primary">Cash</span>
+            Crypto<span className="text-zinc-500">Cash</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
             Secure USDT to Cash Delivery in Thailand. Select your location.
           </p>
         </motion.div>
@@ -38,19 +36,19 @@ export default function Home() {
             >
               <Link
                 href={`/${loc.slug}`}
-                className="group block p-8 border border-border/50 rounded-2xl bg-card/50 backdrop-blur-sm hover:border-primary/50 hover:bg-card/80 transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.1)]"
+                className="group block p-8 border border-zinc-800 rounded-2xl bg-zinc-900/50 backdrop-blur-sm hover:border-white/20 hover:bg-zinc-900 transition-all duration-300"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <div className="p-3 rounded-full bg-zinc-800 text-white group-hover:bg-white group-hover:text-black transition-colors">
                     <MapPin className="w-6 h-6" />
                   </div>
-                  <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <ArrowRight className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors" />
                 </div>
 
-                <h2 className="text-2xl font-bold text-card-foreground group-hover:text-primary text-left">
+                <h2 className="text-2xl font-bold text-white group-hover:text-white text-left">
                   {loc.displayName}
                 </h2>
-                <p className="mt-2 text-muted-foreground text-left text-sm">
+                <p className="mt-2 text-zinc-400 text-left text-sm">
                   Exchange USDT to {loc.currency}
                 </p>
               </Link>
@@ -61,4 +59,3 @@ export default function Home() {
     </main>
   );
 }
-

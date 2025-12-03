@@ -12,9 +12,6 @@ interface CityPageContentProps {
 export function CityPageContent({ location }: CityPageContentProps) {
     return (
         <main className="flex min-h-screen flex-col items-center justify-center p-4 pb-32 bg-background text-foreground relative overflow-hidden">
-            {/* Background Glow */}
-            <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -24,9 +21,9 @@ export function CityPageContent({ location }: CityPageContentProps) {
             >
                 <div className="space-y-2">
                     <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                        CryptoCash <span className="text-primary">{location.displayName}</span>
+                        CryptoCash <span className="text-zinc-500">{location.displayName}</span>
                     </h1>
-                    <p className="text-lg text-muted-foreground">
+                    <p className="text-lg text-zinc-400">
                         Fastest USDT to {location.currency} delivery.
                     </p>
                 </div>

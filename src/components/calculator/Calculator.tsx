@@ -41,9 +41,9 @@ export function Calculator({ cityConfig }: CalculatorProps) {
     };
 
     return (
-        <Card className="w-full bg-card/50 backdrop-blur-sm border-primary/20 shadow-2xl">
+        <Card className="w-full bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 shadow-xl">
             <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl text-primary">
+                <CardTitle className="flex items-center gap-2 text-xl text-white">
                     <ArrowRightLeft className="w-5 h-5" />
                     Exchange Calculator
                 </CardTitle>
@@ -51,7 +51,7 @@ export function Calculator({ cityConfig }: CalculatorProps) {
             <CardContent className="space-y-6">
                 {/* Input Section */}
                 <div className="space-y-2">
-                    <Label htmlFor="usdt-amount" className="text-muted-foreground flex items-center gap-2">
+                    <Label htmlFor="usdt-amount" className="text-zinc-400 flex items-center gap-2">
                         <Wallet className="w-4 h-4" /> You Send (USDT)
                     </Label>
                     <PresetButtons onSelect={handlePresetSelect} currentAmount={typeof amount === 'number' ? amount : 0} />
@@ -62,31 +62,29 @@ export function Calculator({ cityConfig }: CalculatorProps) {
                             placeholder="Enter amount..."
                             value={amount}
                             onChange={handleAmountChange}
-                            className="text-lg font-mono bg-background/50 border-input focus:ring-primary h-12"
+                            className="text-lg font-mono bg-zinc-950 border-zinc-800 focus:ring-white h-12 text-white placeholder:text-zinc-600"
                         />
-                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-muted-foreground">
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-zinc-500">
                             USDT
                         </div>
                     </div>
                 </div>
 
                 {/* Output Section - Dominant Element */}
-                <div className="space-y-2 p-4 rounded-xl bg-primary/10 border border-primary/20 relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-
-                    <Label className="text-primary/80 font-medium flex items-center gap-2">
+                <div className="space-y-2 p-4 rounded-xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
+                    <Label className="text-zinc-400 font-medium flex items-center gap-2">
                         <Banknote className="w-4 h-4" /> You Receive ({cityConfig.currency})
                     </Label>
-                    <div className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-yellow-400 tracking-tight mt-1">
+                    <div className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mt-1">
                         {receiveAmount.toLocaleString(undefined, {
                             minimumFractionDigits: 0,
                             maximumFractionDigits: 2,
                         })}
-                        <span className="text-xl sm:text-2xl ml-2 text-primary/70 font-normal">
+                        <span className="text-xl sm:text-2xl ml-2 text-zinc-500 font-normal">
                             {cityConfig.currency}
                         </span>
                     </div>
-                    <div className="text-xs text-muted-foreground mt-2">
+                    <div className="text-xs text-zinc-500 mt-2">
                         Current Rate: 1 USDT ≈ {rate.toFixed(2)} {cityConfig.currency}
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { CityConfig } from "@/config/locations";
-import { Send } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface StickyActionBtnProps {
@@ -26,10 +26,10 @@ export function StickyActionBtn({ cityConfig }: StickyActionBtnProps) {
                 <Button
                     onClick={handleOrderClick}
                     size="lg"
-                    className="w-full h-16 text-xl font-bold uppercase tracking-wider shadow-[0_0_30px_rgba(16,185,129,0.4)] animate-pulse hover:animate-none bg-emerald-500 hover:bg-emerald-400 text-slate-950 border-none rounded-xl"
+                    className="w-full h-16 text-xl font-bold uppercase tracking-wider bg-white hover:bg-zinc-200 text-black border-none rounded-xl shadow-lg transition-all duration-300"
                 >
-                    <Send className="w-6 h-6 mr-2" />
-                    Order Cash Delivery
+                    <span className="mr-2">ПЕРЕЙТИ К ОБМЕНУ</span>
+                    <ArrowRight className="w-6 h-6" />
                 </Button>
             </motion.div>
         </div>
