@@ -58,8 +58,8 @@
         "step3": "Get your cash"
     },
     "cta": {
-        "getAmount": "Exchange for {amount} {currency}",
-        "getCash": "Go to Ex24.pro",
+        "getAmount": "Check rate for {amount} {currency}",
+        "getCash": "Check current rate",
         "learnMore": "Learn more",
         "readyToExchange": "Ready to exchange?"
     },
@@ -78,7 +78,10 @@
     },
     "footer": {
         "poweredBy": "Rates by Ex24.pro",
-        "disclaimer": "Exchange by Ex24.pro"
+        "disclaimer": "Exchange by Ex24.pro",
+        "calculatorDisclaimer": "Estimate only. Check current rate with partner.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
     },
     "meta": {
         "title": "USDT to Baht Exchange in Thailand | Crypto2Baht",

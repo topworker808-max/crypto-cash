@@ -12,6 +12,7 @@ import { Logo } from '@/components/ui/Logo';
 import { FAQ } from '@/components/faq/FAQ';
 import { motion } from 'framer-motion';
 import { Calculator as CalcIcon, MessageCircle, Banknote, ShieldCheck, TrendingUp, Wallet } from 'lucide-react';
+import Link from 'next/link';
 import type { Locale } from '@/i18n/config';
 import type { Dictionary } from '@/i18n/getDictionary';
 
@@ -145,6 +146,22 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
 
                 {/* FAQ Section */}
                 <FAQ dict={dict} />
+
+                {/* Footer Links */}
+                <div className="pt-8 pb-4 flex flex-col items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
+                    <div className="flex items-center gap-4">
+                        <Link href={`/${lang}/privacy`} className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
+                            {dict.footer.privacy}
+                        </Link>
+                        <span>|</span>
+                        <Link href={`/${lang}/terms`} className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
+                            {dict.footer.terms}
+                        </Link>
+                    </div>
+                    <p className="text-gray-400 dark:text-gray-500">
+                        {dict.footer.disclaimer}
+                    </p>
+                </div>
             </motion.div>
 
             <StickyActionBtn cityConfig={location} receiveAmount={receiveAmount} lang={lang} dict={dict} />

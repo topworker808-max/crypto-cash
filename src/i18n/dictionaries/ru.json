@@ -58,8 +58,8 @@
         "step3": "Получите наличные"
     },
     "cta": {
-        "getAmount": "Обменять на {amount} {currency}",
-        "getCash": "Перейти в Ex24.pro",
+        "getAmount": "Узнать курс на {amount} {currency}",
+        "getCash": "Узнать актуальный курс",
         "learnMore": "Подробнее",
         "readyToExchange": "Готовы к обмену?"
     },
@@ -78,7 +78,10 @@
     },
     "footer": {
         "poweredBy": "Курсы от Ex24.pro",
-        "disclaimer": "Обмен осуществляет Ex24.pro"
+        "disclaimer": "Обмен осуществляет Ex24.pro",
+        "calculatorDisclaimer": "Расчёт ориентировочный. Актуальный курс уточняйте у партнёра.",
+        "privacy": "Политика конфиденциальности",
+        "terms": "Условия использования"
     },
     "meta": {
         "title": "Обмен USDT на баты в Таиланде | Crypto2Baht",

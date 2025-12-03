@@ -9,6 +9,16 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Dictionary } from "@/i18n/getDictionary";
 
+function ThailandFlag({ className = "w-5 h-4" }: { className?: string }) {
+    return (
+        <svg className={className} viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+            <rect width="900" height="600" fill="#A51931"/>
+            <rect y="100" width="900" height="400" fill="#F4F5F8"/>
+            <rect y="200" width="900" height="200" fill="#2D2A4A"/>
+        </svg>
+    );
+}
+
 interface CalculatorProps {
     cityConfig: CityConfig;
     amount: number | "";
@@ -147,7 +157,7 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                                 className="text-3xl font-bold bg-transparent border-none focus:ring-0 h-14 text-gray-900 placeholder:text-gray-400 w-full pl-4 pr-24"
                             />
                             <div className="absolute right-3 flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg shadow-sm">
-                                <span className="w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center text-xs">🇹🇭</span>
+                                <ThailandFlag className="w-5 h-4 rounded-sm" />
                                 <span className="text-gray-900 font-bold text-sm">{cityConfig.currency}</span>
                             </div>
                         </div>
@@ -160,7 +170,7 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                             className="w-full flex items-center justify-between text-xs text-gray-500 hover:text-gray-700 transition-colors py-2"
                         >
                             <span className="flex items-center gap-1"><Info className="w-3 h-3" /> {dict?.calculator.showDetails || 'Transaction details'}</span>
-                            <span>{isDetailsOpen ? (dict?.calculator.hideDetails || "Hide") : (dict?.calculator.showDetails || "Show")}</span>
+                            <span>{isDetailsOpen ? (dict?.calculator.hideDetails || "Hide") : (lang === 'ru' ? 'Показать' : 'Show')}</span>
                         </button>
 
                         <AnimatePresence>
@@ -203,6 +213,11 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                     <Check className="w-3 h-3 text-green-600" />
                     <span>{dict?.footer.poweredBy || 'Rates powered by licensed partner'}</span>
                 </div>
+                <p className="text-center text-gray-400 mt-2 max-w-xs">
+                    {lang === 'ru'
+                        ? 'Расчёт ориентировочный. Актуальный курс уточняйте у партнёра.'
+                        : 'Estimate only. Check current rate with partner.'}
+                </p>
             </div>
         </div>
     );

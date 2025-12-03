@@ -58,8 +58,8 @@
         "step3": "获取现金"
     },
     "cta": {
-        "getAmount": "兑换 {amount} {currency}",
-        "getCash": "前往Ex24.pro",
+        "getAmount": "查询 {amount} {currency} 汇率",
+        "getCash": "查询当前汇率",
         "learnMore": "了解更多",
         "readyToExchange": "准备好兑换了吗？"
     },
@@ -78,7 +78,10 @@
     },
     "footer": {
         "poweredBy": "汇率由Ex24.pro提供",
-        "disclaimer": "兑换服务由Ex24.pro提供"
+        "disclaimer": "兑换服务由Ex24.pro提供",
+        "calculatorDisclaimer": "仅供估算。请向合作伙伴确认当前汇率。",
+        "privacy": "隐私政策",
+        "terms": "服务条款"
     },
     "meta": {
         "title": "泰国USDT兑泰铢 | Crypto2Baht",
