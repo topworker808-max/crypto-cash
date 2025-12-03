@@ -10,6 +10,7 @@ import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { Logo } from '@/components/ui/Logo';
 import { FAQ } from '@/components/faq/FAQ';
+import { JsonLd, HowToJsonLd, FinancialCalculatorJsonLd } from '@/components/seo/JsonLd';
 import { motion } from 'framer-motion';
 import { Calculator as CalcIcon, MessageCircle, Banknote, ShieldCheck, TrendingUp, Wallet } from 'lucide-react';
 import Link from 'next/link';
@@ -36,8 +37,14 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
     const cityName = dict.landing[cityNameKey] || location.displayName;
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-start pt-6 p-4 pb-40 bg-[#E6E6E6] dark:bg-gray-900 text-gray-900 dark:text-gray-100 relative overflow-hidden transition-colors">
-            <motion.div
+        <>
+            {/* JSON-LD Structured Data for SEO */}
+            <JsonLd dict={dict} type="faq" />
+            <HowToJsonLd dict={dict} lang={lang} />
+            <FinancialCalculatorJsonLd lang={lang} />
+
+            <main className="flex min-h-screen flex-col items-center justify-start pt-6 p-4 pb-40 bg-[#E6E6E6] dark:bg-gray-900 text-gray-900 dark:text-gray-100 relative overflow-hidden transition-colors">
+                <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -150,6 +157,10 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
                 {/* Footer Links */}
                 <div className="pt-8 pb-4 flex flex-col items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
                     <div className="flex items-center gap-4">
+                        <Link href={`/${lang}/blog`} className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
+                            {dict.blog.title}
+                        </Link>
+                        <span>|</span>
                         <Link href={`/${lang}/privacy`} className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
                             {dict.footer.privacy}
                         </Link>
@@ -166,5 +177,6 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
 
             <StickyActionBtn cityConfig={location} receiveAmount={receiveAmount} lang={lang} dict={dict} />
         </main>
+        </>
     );
 }

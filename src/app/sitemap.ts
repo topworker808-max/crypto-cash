@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next';
 import { locations } from '@/config/locations';
+import { blogPosts } from '@/config/blog';
 import { i18n } from '@/i18n/config';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://cryptocash.pro';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://crypto2baht.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const now = new Date();
@@ -27,6 +28,39 @@ export default function sitemap(): MetadataRoute.Sitemap {
                 priority: 0.8,
             });
         }
+
+        // Blog index page
+        pages.push({
+            url: `${BASE_URL}/${lang}/blog`,
+            lastModified: now,
+            changeFrequency: 'weekly',
+            priority: 0.7,
+        });
+
+        // Blog posts
+        for (const post of blogPosts) {
+            pages.push({
+                url: `${BASE_URL}/${lang}/blog/${post.slug}`,
+                lastModified: new Date(post.updatedAt || post.publishedAt),
+                changeFrequency: 'monthly',
+                priority: 0.6,
+            });
+        }
+
+        // Static pages
+        pages.push({
+            url: `${BASE_URL}/${lang}/privacy`,
+            lastModified: now,
+            changeFrequency: 'yearly',
+            priority: 0.3,
+        });
+
+        pages.push({
+            url: `${BASE_URL}/${lang}/terms`,
+            lastModified: now,
+            changeFrequency: 'yearly',
+            priority: 0.3,
+        });
     }
 
     return pages;

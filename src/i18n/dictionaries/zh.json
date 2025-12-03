@@ -8,7 +8,10 @@
         "subtitle": "合作伙伴Ex24.pro提供最优USDT → THB汇率",
         "selectLocation": "选择城市",
         "pattaya": "芭提雅",
-        "phuket": "普吉岛"
+        "phuket": "普吉岛",
+        "bangkok": "曼谷",
+        "huahin": "华欣",
+        "samui": "苏梅岛"
     },
     "calculator": {
         "title": "兑换计算器",
@@ -86,5 +89,30 @@
     "meta": {
         "title": "泰国USDT兑泰铢 | Crypto2Baht",
         "description": "USDT兑泰铢计算器。合作伙伴Ex24.pro提供最优汇率。与银行和ATM对比。"
+    },
+    "blog": {
+        "title": "实用文章",
+        "subtitle": "关于泰国加密货币兑换的一切",
+        "readMore": "阅读更多",
+        "backToBlog": "← 所有文章",
+        "publishedAt": "发布于",
+        "updatedAt": "更新于",
+        "posts": {
+            "how-to-exchange-usdt-thailand": {
+                "title": "2025年如何在泰国兑换USDT为泰铢",
+                "description": "USDT加密货币兑换泰铢的详细指南。比较各种方式、费用和建议。",
+                "content": "## 为什么要将USDT兑换成泰铢？\n\n泰国是游客和数字游民的热门目的地。许多人将储蓄存放在USDT（Tether）中。访问泰国时，如何高效地将加密货币兑换成当地货币？\n\n## 在泰国兑换USDT的方式\n\n### 1. 通过Ex24.pro兑换（推荐）\n- **汇率：** 市场汇率，无隐藏费用\n- **手续费：** 0%\n- **配送：** 快递到任何地点或自取\n- **最低金额：** 100 USDT起\n\n### 2. 使用加密卡在ATM取款\n- **汇率：** 比市场差3-5%\n- **手续费：** 每次取款220泰铢 + 卡费\n- **限额：** 通常每次最多20,000泰铢\n\n## 结论\n\n在泰国兑换USDT最划算的方式是通过可信赖的合作伙伴Ex24.pro。您可以获得市场汇率、免费配送和安全保障。"
+            },
+            "atm-fees-thailand": {
+                "title": "2025年泰国ATM手续费：您损失了多少",
+                "description": "详解在泰国ATM取款的所有费用。如何在每次取款中节省高达10%。",
+                "content": "## 泰国ATM的隐藏费用\n\n许多游客不知道在泰国ATM取款实际损失了多少钱。\n\n### 固定ATM费用：220泰铢\n每台泰国ATM每次取款收取**220泰铢**，约**6-7美元**。\n\n## 结论\n\n超过10,000泰铢的金额，通过Ex24.pro加密兑换更划算。"
+            },
+            "best-way-to-get-cash-thailand": {
+                "title": "2025年在泰国获取现金的最佳方式",
+                "description": "比较在泰国获取现金的所有方式：ATM、兑换处、加密货币。哪种更好？",
+                "content": "## 泰国现金：如何选择？\n\n尽管数字支付不断发展，在泰国仍然需要现金：街头美食、出租车、市场、小商店。\n\n## 结论\n\n如果您有加密货币——通过Ex24.pro兑换。这是2025年在泰国获取现金最划算的方式。"
+            }
+        }
     }
 }

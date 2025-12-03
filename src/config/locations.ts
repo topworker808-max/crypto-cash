@@ -12,14 +12,35 @@ export const locations: CityConfig[] = [
         displayName: 'Pattaya',
         currency: 'THB',
         baseRateModifier: 1.0,
-        affiliateLink: 'https://qr.ex24.pro/pattayahelper', // Updated
+        affiliateLink: 'https://qr.ex24.pro/pattayahelper',
     },
     {
         slug: 'phuket',
         displayName: 'Phuket',
         currency: 'THB',
         baseRateModifier: 1.0,
-        affiliateLink: 'https://qr.ex24.pro/pattayahelper', // Updated
+        affiliateLink: 'https://qr.ex24.pro/pattayahelper',
+    },
+    {
+        slug: 'bangkok',
+        displayName: 'Bangkok',
+        currency: 'THB',
+        baseRateModifier: 1.0,
+        affiliateLink: 'https://qr.ex24.pro/pattayahelper',
+    },
+    {
+        slug: 'huahin',
+        displayName: 'Hua Hin',
+        currency: 'THB',
+        baseRateModifier: 1.0,
+        affiliateLink: 'https://qr.ex24.pro/pattayahelper',
+    },
+    {
+        slug: 'samui',
+        displayName: 'Koh Samui',
+        currency: 'THB',
+        baseRateModifier: 1.0,
+        affiliateLink: 'https://qr.ex24.pro/pattayahelper',
     },
 ];
 
