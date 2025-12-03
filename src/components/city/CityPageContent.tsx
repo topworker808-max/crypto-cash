@@ -5,18 +5,20 @@ import { CityConfig } from '@/config/locations';
 import { Calculator } from '@/components/calculator/Calculator';
 import { RateComparison } from '@/components/calculator/RateComparison';
 import { StickyActionBtn } from '@/components/conversion/StickyActionBtn';
-import { BASE_EXCHANGE_RATE } from '@/lib/constants';
 import { motion } from 'framer-motion';
 import { Calculator as CalcIcon, MessageCircle, Banknote, ShieldCheck, TrendingUp, Wallet } from 'lucide-react';
 
 interface CityPageContentProps {
     location: CityConfig;
+    initialRate: number;
 }
 
-export function CityPageContent({ location }: CityPageContentProps) {
+export function CityPageContent({ location, initialRate }: CityPageContentProps) {
     const [amount, setAmount] = useState<number | "">("");
     const [receiveAmount, setReceiveAmount] = useState<number | "">("");
-    const rate = BASE_EXCHANGE_RATE * location.baseRateModifier;
+
+    // Use the live rate combined with the location modifier
+    const rate = initialRate * location.baseRateModifier;
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-start pt-12 p-4 pb-40 bg-background text-foreground relative overflow-hidden">
@@ -42,6 +44,7 @@ export function CityPageContent({ location }: CityPageContentProps) {
                     receiveAmount={receiveAmount}
                     onAmountChange={setAmount}
                     onReceiveAmountChange={setReceiveAmount}
+                    rate={rate}
                 />
 
                 {/* Rate Comparison Widget */}

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { locations } from '@/config/locations';
 import { Metadata } from 'next';
 import { CityPageContent } from '@/components/city/CityPageContent';
+import { getLiveRate } from '@/lib/rate-service';
 
 interface CityPageProps {
     params: Promise<{
@@ -42,5 +43,8 @@ export default async function CityPage({ params }: CityPageProps) {
         notFound();
     }
 
-    return <CityPageContent location={location} />;
+    // Fetch live rate
+    const liveRate = await getLiveRate();
+
+    return <CityPageContent location={location} initialRate={liveRate} />;
 }

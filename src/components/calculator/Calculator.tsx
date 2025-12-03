@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { CityConfig } from "@/config/locations";
-import { BASE_EXCHANGE_RATE } from "@/lib/constants";
 import { ArrowUpDown, Check, Info } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,10 +14,10 @@ interface CalculatorProps {
     receiveAmount: number | "";
     onAmountChange: (val: number | "") => void;
     onReceiveAmountChange: (val: number | "") => void;
+    rate: number;
 }
 
-export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, onReceiveAmountChange }: CalculatorProps) {
-    const rate = BASE_EXCHANGE_RATE * cityConfig.baseRateModifier;
+export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, onReceiveAmountChange, rate }: CalculatorProps) {
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
     const handleUSDTChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,8 +79,14 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                         <div className="relative z-10 bg-[#242936] p-2 rounded-full border border-[#1A1F2B]">
                             <ArrowUpDown className="w-4 h-4 text-gray-400" />
                         </div>
-                        <div className="absolute right-0 top-1/2 -translate-y-1/2 text-xs text-gray-500">
-                            1 USDT ≈ {rate.toFixed(2)} {cityConfig.currency}
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            </span>
+                            <span className="text-xs text-gray-500 font-medium">
+                                1 USDT ≈ {rate.toFixed(2)} {cityConfig.currency}
+                            </span>
                         </div>
                     </div>
 
@@ -141,9 +146,12 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                 </CardContent>
             </Card>
 
-            <div className="flex items-center justify-center gap-2 text-xs text-gray-600">
-                <Check className="w-3 h-3 text-green-500" />
-                <span>Secured by Ex24.pro</span>
+            <div className="flex flex-col items-center justify-center gap-1 text-xs text-gray-600">
+                <div className="flex items-center gap-2">
+                    <Check className="w-3 h-3 text-green-500" />
+                    <span>Secured by Ex24.pro</span>
+                </div>
+                <span className="text-[10px] text-gray-700">Indicative market rate. Final rate depends on volume.</span>
             </div>
         </div>
     );
