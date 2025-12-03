@@ -8,6 +8,7 @@ import { AtmLossCalculator } from '@/components/calculator/AtmLossCalculator';
 import { StickyActionBtn } from '@/components/conversion/StickyActionBtn';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { Logo } from '@/components/ui/Logo';
 import { FAQ } from '@/components/faq/FAQ';
 import { motion } from 'framer-motion';
 import { Calculator as CalcIcon, MessageCircle, Banknote, ShieldCheck, TrendingUp, Wallet } from 'lucide-react';
@@ -42,14 +43,12 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
                 className="max-w-md w-full text-center space-y-8 relative z-10"
             >
                 {/* Header with controls - like Ex24.pro */}
-                <div className="flex items-center justify-between w-full px-2">
+                <div className="flex items-center justify-between w-full">
                     {/* Theme Toggle - Left */}
                     <ThemeToggle />
 
-                    {/* Logo/Title - Center */}
-                    <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        Crypto2Baht
-                    </h1>
+                    {/* Logo - Center */}
+                    <Logo className="h-9 sm:h-10" />
 
                     {/* Language Switcher - Right */}
                     <LanguageSwitcher currentLang={lang} />
