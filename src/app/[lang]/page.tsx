@@ -3,7 +3,7 @@ import { i18n, type Locale, isValidLocale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
 import { CityPageContent } from '@/components/city/CityPageContent';
 import { DEFAULT_LOCATION } from '@/config/locations';
-import { getLiveRateWithTimestamp } from '@/lib/rate-service';
+import { getAllRates } from '@/lib/rate-service';
 import { notFound } from 'next/navigation';
 
 interface LangPageProps {
@@ -38,16 +38,17 @@ export default async function LangPage({ params }: LangPageProps) {
     const { lang } = await params;
     if (!isValidLocale(lang)) notFound();
 
-    const [rateData, dict] = await Promise.all([
-        getLiveRateWithTimestamp(),
+    const [ratesData, dict] = await Promise.all([
+        getAllRates(),
         getDictionary(lang as Locale),
     ]);
 
     return (
         <CityPageContent
             location={DEFAULT_LOCATION}
-            initialRate={rateData.rate}
-            rateUpdatedAt={rateData.updatedAt}
+            initialRate={ratesData.usdtRate}
+            initialRubRate={ratesData.rubRate}
+            rateUpdatedAt={ratesData.updatedAt}
             lang={lang as Locale}
             dict={dict}
         />

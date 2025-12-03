@@ -14,18 +14,20 @@ import { JsonLd, HowToJsonLd, FinancialCalculatorJsonLd } from '@/components/seo
 import { motion } from 'framer-motion';
 import { Calculator as CalcIcon, MessageCircle, Banknote, ShieldCheck, TrendingUp, Wallet } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Locale } from '@/i18n/config';
 import type { Dictionary } from '@/i18n/getDictionary';
 
 interface CityPageContentProps {
     location: CityConfig;
     initialRate: number;
+    initialRubRate?: number;
     rateUpdatedAt?: number;
     lang: Locale;
     dict: Dictionary;
 }
 
-export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, dict }: CityPageContentProps) {
+export function CityPageContent({ location, initialRate, initialRubRate = 0.38, rateUpdatedAt, lang, dict }: CityPageContentProps) {
     const [amount, setAmount] = useState<number | "">("");
     const [receiveAmount, setReceiveAmount] = useState<number | "">("");
     const [sourceCurrency, setSourceCurrency] = useState<SourceCurrency>('USDT');
@@ -33,8 +35,8 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
     // Use the live rate combined with the location modifier
     const rate = initialRate * location.baseRateModifier;
 
-    // RUB to THB rate (approximately 0.38 THB per 1 RUB, or ~2.6 RUB per 1 THB)
-    const rubRate = 0.38;
+    // RUB to THB rate from API
+    const rubRate = initialRubRate;
 
     // Get city name in current language
     const cityNameKey = location.slug as keyof typeof dict.landing;
@@ -87,16 +89,18 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
                     onSourceCurrencyChange={setSourceCurrency}
                 />
 
-                {/* Rate Comparison Widget */}
-                <RateComparison
-                    cityConfig={location}
-                    amount={typeof amount === 'number' ? amount : 1000}
-                    rate={rate}
-                    dict={dict}
-                />
+                {/* Rate Comparison Widget - only for USDT */}
+                {sourceCurrency === 'USDT' && (
+                    <RateComparison
+                        cityConfig={location}
+                        amount={typeof amount === 'number' ? amount : 1000}
+                        rate={rate}
+                        dict={dict}
+                    />
+                )}
 
-                {/* ATM Loss Calculator */}
-                {typeof amount === 'number' && amount >= 100 && (
+                {/* ATM Loss Calculator - only for USDT */}
+                {sourceCurrency === 'USDT' && typeof amount === 'number' && amount >= 100 && (
                     <AtmLossCalculator
                         cityConfig={location}
                         amount={amount}
@@ -133,24 +137,108 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
                     </div>
                 </div>
 
+                {/* Ways to Receive - Card Grid with Images */}
+                <div className="pt-8 space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white text-center">
+                        {lang === 'ru' ? 'Способы получения' : 'Ways to Receive'}
+                    </h3>
+                    <div className="grid grid-cols-2 gap-3">
+                        {/* ATM Card */}
+                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-center text-center">
+                            <div className="w-16 h-16 mb-2 relative">
+                                <Image
+                                    src="/images/atm.png"
+                                    alt="ATM"
+                                    width={64}
+                                    height={64}
+                                    className="object-contain"
+                                />
+                            </div>
+                            <h4 className="text-sm font-medium text-gray-900 dark:text-white">
+                                {lang === 'ru' ? 'Снятие в ATM' : 'ATM Withdrawal'}
+                            </h4>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                {lang === 'ru' ? 'По QR-коду без карты' : 'QR code, no card needed'}
+                            </p>
+                        </div>
+
+                        {/* Delivery Card */}
+                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-center text-center">
+                            <div className="w-16 h-16 mb-2 relative">
+                                <Image
+                                    src="/images/delivery.png"
+                                    alt="Delivery"
+                                    width={64}
+                                    height={64}
+                                    className="object-contain"
+                                />
+                            </div>
+                            <h4 className="text-sm font-medium text-gray-900 dark:text-white">
+                                {lang === 'ru' ? 'Доставка курьером' : 'Courier Delivery'}
+                            </h4>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                {lang === 'ru' ? 'До двери в удобное время' : 'To your door anytime'}
+                            </p>
+                        </div>
+
+                        {/* Cash/Office Card */}
+                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-center text-center">
+                            <div className="w-16 h-16 mb-2 relative">
+                                <Image
+                                    src="/images/cash.png"
+                                    alt="Cash"
+                                    width={64}
+                                    height={64}
+                                    className="object-contain"
+                                />
+                            </div>
+                            <h4 className="text-sm font-medium text-gray-900 dark:text-white">
+                                {lang === 'ru' ? 'В офисе Ex24' : 'Ex24 Office'}
+                            </h4>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                {lang === 'ru' ? 'Самовывоз наличных' : 'Cash pickup'}
+                            </p>
+                        </div>
+
+                        {/* Bank Transfer Card */}
+                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-center text-center">
+                            <div className="w-16 h-16 mb-2 relative">
+                                <Image
+                                    src="/images/bank.png"
+                                    alt="Bank"
+                                    width={64}
+                                    height={64}
+                                    className="object-contain"
+                                />
+                            </div>
+                            <h4 className="text-sm font-medium text-gray-900 dark:text-white">
+                                {lang === 'ru' ? 'На тайский счёт' : 'Thai Bank Account'}
+                            </h4>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                {lang === 'ru' ? 'Перевод по реквизитам' : 'Bank transfer'}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* How it Works Section */}
                 <div className="pt-8 space-y-6">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{dict.howItWorks.title.replace('{city}', String(cityName))}</h3>
                     <div className="grid grid-cols-3 gap-4">
                         <div className="flex flex-col items-center gap-2 text-center">
-                            <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center text-gray-700 dark:text-gray-300">
+                            <div className="w-12 h-12 rounded-xl bg-[#FFD528] shadow-sm flex items-center justify-center text-gray-900">
                                 <CalcIcon className="w-6 h-6" />
                             </div>
                             <p className="text-xs text-gray-600 dark:text-gray-400">{dict.howItWorks.step1}</p>
                         </div>
                         <div className="flex flex-col items-center gap-2 text-center">
-                            <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center text-gray-700 dark:text-gray-300">
+                            <div className="w-12 h-12 rounded-xl bg-[#FFD528] shadow-sm flex items-center justify-center text-gray-900">
                                 <MessageCircle className="w-6 h-6" />
                             </div>
                             <p className="text-xs text-gray-600 dark:text-gray-400">{dict.howItWorks.step2}</p>
                         </div>
                         <div className="flex flex-col items-center gap-2 text-center">
-                            <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center text-gray-700 dark:text-gray-300">
+                            <div className="w-12 h-12 rounded-xl bg-[#FFD528] shadow-sm flex items-center justify-center text-gray-900">
                                 <Banknote className="w-6 h-6" />
                             </div>
                             <p className="text-xs text-gray-600 dark:text-gray-400">{dict.howItWorks.step3}</p>
