@@ -18,18 +18,18 @@ interface FAQItemProps {
 
 function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
     return (
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
             <button
                 onClick={onClick}
-                className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
             >
-                <span className="font-medium text-gray-900 pr-4">{question}</span>
+                <span className="font-medium text-gray-900 dark:text-white pr-4">{question}</span>
                 <motion.div
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
                     className="flex-shrink-0"
                 >
-                    <ChevronDown className="w-5 h-5 text-gray-500" />
+                    <ChevronDown className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                 </motion.div>
             </button>
             <AnimatePresence>
@@ -41,7 +41,7 @@ function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                     >
-                        <div className="px-5 pb-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-3">
+                        <div className="px-5 pb-4 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-3">
                             {answer}
                         </div>
                     </motion.div>
@@ -64,7 +64,7 @@ export function FAQ({ dict }: FAQProps) {
 
     return (
         <section className="py-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 text-center">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 text-center">
                 {dict.faq.title}
             </h2>
             <div className="space-y-3 max-w-md mx-auto">

@@ -1,0 +1,87 @@
+{
+    "common": {
+        "siteName": "CryptoCash",
+        "tagline": "USDT兑换现金"
+    },
+    "landing": {
+        "title": "加密货币兑换现金",
+        "subtitle": "泰国最优USDT兑泰铢汇率",
+        "selectLocation": "选择您的城市",
+        "pattaya": "芭提雅",
+        "phuket": "普吉岛"
+    },
+    "calculator": {
+        "title": "专业计算器",
+        "subtitle": "USDT兑换{currency}",
+        "youSend": "您支付",
+        "youReceive": "您收到",
+        "liveRate": "实时汇率",
+        "rateUpdated": "汇率更新于{time}",
+        "serviceFee": "服务费",
+        "delivery": "配送",
+        "included": "已包含",
+        "free": "免费",
+        "totalToPay": "应付总额",
+        "showDetails": "显示详情",
+        "hideDetails": "隐藏详情"
+    },
+    "comparison": {
+        "title": "兑换方式对比",
+        "method": "方式",
+        "rate": "汇率",
+        "youGet": "您获得",
+        "thaiBanks": "泰国银行",
+        "atmWithdrawal": "ATM取款",
+        "cryptoCash": "CryptoCash",
+        "savings": "节省 {amount} {currency}",
+        "bestRate": "最优汇率"
+    },
+    "benefits": {
+        "title": "为什么用USDT兑换更划算？",
+        "betterRate": {
+            "title": "汇率优于银行",
+            "description": "银行收取3-5%隐藏费用。我们提供接近市场的汇率。"
+        },
+        "noAtmFees": {
+            "title": "无ATM手续费",
+            "description": "每次取款节省220泰铢。无金额限制。"
+        },
+        "safeDelivery": {
+            "title": "安全送货上门",
+            "description": "无需携带现金。我们安全送货到您的公寓大堂。"
+        }
+    },
+    "howItWorks": {
+        "title": "如何在{city}获取现金？",
+        "step1": "计算精确金额",
+        "step2": "打开官方聊天",
+        "step3": "快递员送货上门"
+    },
+    "cta": {
+        "getAmount": "兑换 {amount} {currency}",
+        "getCash": "前往合作伙伴",
+        "learnMore": "了解更多",
+        "readyToExchange": "准备好兑换了吗？"
+    },
+    "faq": {
+        "title": "常见问题",
+        "q1": "兑换如何进行？",
+        "a1": "计算您的金额，通过聊天联系我们的合作伙伴，现金将送货到您的位置。",
+        "q2": "需要多长时间？",
+        "a2": "市区内通常从下单到送达30-60分钟。",
+        "q3": "最低/最高金额是多少？",
+        "a3": "最低100 USDT，最高取决于库存（通常最多50,000 USDT）。",
+        "q4": "安全吗？",
+        "a4": "是的。我们的合作伙伴Ex24.pro是持牌交易所，在泰国有10多个办事处。",
+        "q5": "需要什么证件？",
+        "a5": "只需有效身份证或护照进行验证。"
+    },
+    "footer": {
+        "poweredBy": "汇率由持牌合作伙伴提供",
+        "disclaimer": "兑换服务由Ex24.pro提供"
+    },
+    "meta": {
+        "title": "{city}USDT兑换 | CryptoCash",
+        "description": "{city}最优USDT兑{currency}汇率。快速安全配送。免费实时汇率计算器。"
+    }
+}

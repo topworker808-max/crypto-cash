@@ -7,6 +7,7 @@ import { RateComparison } from '@/components/calculator/RateComparison';
 import { AtmLossCalculator } from '@/components/calculator/AtmLossCalculator';
 import { StickyActionBtn } from '@/components/conversion/StickyActionBtn';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { FAQ } from '@/components/faq/FAQ';
 import { motion } from 'framer-motion';
 import { Calculator as CalcIcon, MessageCircle, Banknote, ShieldCheck, TrendingUp, Wallet } from 'lucide-react';
@@ -33,8 +34,13 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
     const cityName = dict.landing[cityNameKey] || location.displayName;
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-start pt-12 p-4 pb-40 bg-[#E6E6E6] text-gray-900 relative overflow-hidden">
-            {/* Language Switcher */}
+        <main className="flex min-h-screen flex-col items-center justify-start pt-12 p-4 pb-40 bg-[#E6E6E6] dark:bg-gray-900 text-gray-900 dark:text-gray-100 relative overflow-hidden transition-colors">
+            {/* Theme Toggle - Left */}
+            <div className="absolute top-4 left-4 z-20">
+                <ThemeToggle />
+            </div>
+
+            {/* Language Switcher - Right */}
             <div className="absolute top-4 right-4 z-20">
                 <LanguageSwitcher currentLang={lang} />
             </div>
@@ -46,10 +52,10 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
                 className="max-w-md w-full text-center space-y-8 relative z-10"
             >
                 <div className="space-y-2">
-                    <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
-                        CryptoCash <span className="text-gray-500">{cityName}</span>
+                    <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        CryptoCash <span className="text-gray-500 dark:text-gray-400">{cityName}</span>
                     </h1>
-                    <p className="text-base text-gray-600">
+                    <p className="text-base text-gray-600 dark:text-gray-400">
                         {dict.calculator.title}. {dict.calculator.subtitle.replace('{currency}', location.currency)}
                     </p>
                 </div>
@@ -85,27 +91,27 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
 
                 {/* SEO Content Block: Why Exchange? */}
                 <div className="pt-6 space-y-4 text-left">
-                    <h3 className="text-lg font-semibold text-gray-900 text-center">{dict.benefits.title}</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white text-center">{dict.benefits.title}</h3>
                     <div className="grid grid-cols-1 gap-3">
-                        <div className="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                        <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
                             <TrendingUp className="w-5 h-5 text-green-600 mt-0.5" />
                             <div>
-                                <h4 className="text-sm font-medium text-gray-900">{dict.benefits.betterRate.title}</h4>
-                                <p className="text-xs text-gray-500">{dict.benefits.betterRate.description}</p>
+                                <h4 className="text-sm font-medium text-gray-900 dark:text-white">{dict.benefits.betterRate.title}</h4>
+                                <p className="text-xs text-gray-500 dark:text-gray-400">{dict.benefits.betterRate.description}</p>
                             </div>
                         </div>
-                        <div className="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                        <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
                             <Wallet className="w-5 h-5 text-blue-600 mt-0.5" />
                             <div>
-                                <h4 className="text-sm font-medium text-gray-900">{dict.benefits.noAtmFees.title}</h4>
-                                <p className="text-xs text-gray-500">{dict.benefits.noAtmFees.description}</p>
+                                <h4 className="text-sm font-medium text-gray-900 dark:text-white">{dict.benefits.noAtmFees.title}</h4>
+                                <p className="text-xs text-gray-500 dark:text-gray-400">{dict.benefits.noAtmFees.description}</p>
                             </div>
                         </div>
-                        <div className="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                        <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
                             <ShieldCheck className="w-5 h-5 text-purple-600 mt-0.5" />
                             <div>
-                                <h4 className="text-sm font-medium text-gray-900">{dict.benefits.safeDelivery.title}</h4>
-                                <p className="text-xs text-gray-500">{dict.benefits.safeDelivery.description}</p>
+                                <h4 className="text-sm font-medium text-gray-900 dark:text-white">{dict.benefits.safeDelivery.title}</h4>
+                                <p className="text-xs text-gray-500 dark:text-gray-400">{dict.benefits.safeDelivery.description}</p>
                             </div>
                         </div>
                     </div>
@@ -113,25 +119,25 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
 
                 {/* How it Works Section */}
                 <div className="pt-8 space-y-6">
-                    <h3 className="text-lg font-semibold text-gray-900">{dict.howItWorks.title.replace('{city}', String(cityName))}</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{dict.howItWorks.title.replace('{city}', String(cityName))}</h3>
                     <div className="grid grid-cols-3 gap-4">
                         <div className="flex flex-col items-center gap-2 text-center">
-                            <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-gray-700">
+                            <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center text-gray-700 dark:text-gray-300">
                                 <CalcIcon className="w-6 h-6" />
                             </div>
-                            <p className="text-xs text-gray-600">{dict.howItWorks.step1}</p>
+                            <p className="text-xs text-gray-600 dark:text-gray-400">{dict.howItWorks.step1}</p>
                         </div>
                         <div className="flex flex-col items-center gap-2 text-center">
-                            <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-gray-700">
+                            <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center text-gray-700 dark:text-gray-300">
                                 <MessageCircle className="w-6 h-6" />
                             </div>
-                            <p className="text-xs text-gray-600">{dict.howItWorks.step2}</p>
+                            <p className="text-xs text-gray-600 dark:text-gray-400">{dict.howItWorks.step2}</p>
                         </div>
                         <div className="flex flex-col items-center gap-2 text-center">
-                            <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-gray-700">
+                            <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center text-gray-700 dark:text-gray-300">
                                 <Banknote className="w-6 h-6" />
                             </div>
-                            <p className="text-xs text-gray-600">{dict.howItWorks.step3}</p>
+                            <p className="text-xs text-gray-600 dark:text-gray-400">{dict.howItWorks.step3}</p>
                         </div>
                     </div>
                 </div>

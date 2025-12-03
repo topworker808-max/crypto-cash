@@ -48,14 +48,14 @@ export function StickyActionBtn({ cityConfig, receiveAmount, lang = 'en', dict }
     }
 
     return (
-        <div className="fixed bottom-0 left-0 w-full z-50 p-4 bg-gradient-to-t from-[#E6E6E6] via-[#E6E6E6]/95 to-transparent pb-8">
+        <div className="fixed bottom-0 left-0 w-full z-50 p-4 bg-gradient-to-t from-[#E6E6E6] via-[#E6E6E6]/95 to-transparent dark:from-gray-900 dark:via-gray-900/95 pb-8">
             <motion.div
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
                 className="w-full max-w-md mx-auto space-y-2"
             >
-                <p className="text-center text-sm text-gray-600">
+                <p className="text-center text-sm text-gray-600 dark:text-gray-400">
                     {dict?.cta.readyToExchange || "Ready to exchange?"}
                 </p>
                 <Button
