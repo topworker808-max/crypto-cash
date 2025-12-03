@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { CityConfig } from "@/config/locations";
 import { BASE_EXCHANGE_RATE } from "@/lib/constants";
-import { ArrowDown, Check, Info } from "lucide-react";
+import { ArrowUpDown, Check, Info } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -72,11 +72,16 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                         </div>
                     </div>
 
-                    {/* Divider with Rate Badge */}
-                    <div className="relative h-px bg-[#1A1F2B] mx-6">
-                        <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#242936] px-3 py-1 rounded-full border border-[#1A1F2B] flex items-center gap-2 text-xs text-gray-400">
-                            <ArrowDown className="w-3 h-3" />
-                            <span>1 USDT ≈ {rate.toFixed(2)} {cityConfig.currency}</span>
+                    {/* Toggle / Rate Divider */}
+                    <div className="relative h-6 mx-6 flex items-center justify-center">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full h-px bg-[#1A1F2B]" />
+                        </div>
+                        <div className="relative z-10 bg-[#242936] p-2 rounded-full border border-[#1A1F2B]">
+                            <ArrowUpDown className="w-4 h-4 text-gray-400" />
+                        </div>
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 text-xs text-gray-500">
+                            1 USDT ≈ {rate.toFixed(2)} {cityConfig.currency}
                         </div>
                     </div>
 
