@@ -1,99 +1,143 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { CityConfig } from "@/config/locations";
 import { BASE_EXCHANGE_RATE } from "@/lib/constants";
-import { PresetButtons } from "./PresetButtons";
-import { ArrowRightLeft, Banknote, Wallet, ShieldCheck } from "lucide-react";
+import { ArrowDown, Check, Info } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface CalculatorProps {
     cityConfig: CityConfig;
+    amount: number | "";
+    receiveAmount: number | "";
+    onAmountChange: (val: number | "") => void;
+    onReceiveAmountChange: (val: number | "") => void;
 }
 
-export function Calculator({ cityConfig }: CalculatorProps) {
-    const [amount, setAmount] = useState<number | "">("");
-    const [receiveAmount, setReceiveAmount] = useState<number>(0);
-
+export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, onReceiveAmountChange }: CalculatorProps) {
     const rate = BASE_EXCHANGE_RATE * cityConfig.baseRateModifier;
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
-    useEffect(() => {
-        const val = typeof amount === "number" ? amount : 0;
-        setReceiveAmount(val * rate);
-    }, [amount, rate]);
-
-    const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleUSDTChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value;
         if (val === "") {
-            setAmount("");
+            onAmountChange("");
+            onReceiveAmountChange("");
             return;
         }
         const num = parseFloat(val);
         if (!isNaN(num) && num >= 0) {
-            setAmount(num);
+            onAmountChange(num);
+            onReceiveAmountChange(parseFloat((num * rate).toFixed(2)));
         }
     };
 
-    const handlePresetSelect = (val: number) => {
-        setAmount(val);
+    const handleTHBChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value;
+        if (val === "") {
+            onAmountChange("");
+            onReceiveAmountChange("");
+            return;
+        }
+        const num = parseFloat(val);
+        if (!isNaN(num) && num >= 0) {
+            onReceiveAmountChange(num);
+            onAmountChange(parseFloat((num / rate).toFixed(2)));
+        }
     };
 
     return (
-        <div className="space-y-4">
-            <Card className="w-full bg-[#242936] border-none shadow-xl rounded-2xl">
-                <CardHeader className="pb-2">
-                    <CardTitle className="flex items-center gap-2 text-lg text-white font-medium">
-                        <ArrowRightLeft className="w-5 h-5 text-gray-400" />
-                        Rate Calculator
-                    </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                    {/* Input Section */}
-                    <div className="space-y-2">
-                        <Label htmlFor="usdt-amount" className="text-gray-400 flex items-center gap-2 text-sm">
-                            <Wallet className="w-4 h-4" /> You Send (USDT)
-                        </Label>
-                        <PresetButtons onSelect={handlePresetSelect} currentAmount={typeof amount === 'number' ? amount : 0} />
-                        <div className="relative">
+        <div className="space-y-4 w-full max-w-md mx-auto">
+            <Card className="w-full bg-[#242936] border-none shadow-xl rounded-3xl overflow-hidden">
+                <CardContent className="p-0">
+                    {/* Top Input: You Send */}
+                    <div className="p-6 pb-4 space-y-2 relative">
+                        <Label htmlFor="usdt-input" className="text-gray-400 text-sm font-medium ml-1">You send</Label>
+                        <div className="relative flex items-center bg-[#1A1F2B] rounded-2xl border border-transparent focus-within:border-white/20 transition-all">
                             <Input
-                                id="usdt-amount"
+                                id="usdt-input"
                                 type="number"
-                                placeholder="Enter amount..."
+                                placeholder="0"
                                 value={amount}
-                                onChange={handleAmountChange}
-                                className="text-xl font-medium bg-[#1A1F2B] border-none focus:ring-1 focus:ring-white/20 h-14 text-white placeholder:text-gray-600 rounded-xl"
+                                onChange={handleUSDTChange}
+                                className="text-3xl font-bold bg-transparent border-none focus:ring-0 h-16 text-white placeholder:text-gray-700 w-full pl-4 pr-24"
                             />
-                            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-500">
-                                USDT
+                            <div className="absolute right-4 flex items-center gap-2 bg-[#242936] px-3 py-1.5 rounded-xl">
+                                <span className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-xs">₮</span>
+                                <span className="text-white font-bold">USDT</span>
                             </div>
                         </div>
                     </div>
 
-                    {/* Output Section - Hero Element */}
-                    <div className="space-y-2 p-5 rounded-xl bg-[#1A1F2B] border border-white/5 relative overflow-hidden">
-                        <Label className="text-gray-400 font-medium flex items-center gap-2 text-sm">
-                            <Banknote className="w-4 h-4" /> You Receive ({cityConfig.currency})
-                        </Label>
-                        <div className="text-5xl sm:text-6xl font-bold text-white tracking-tight mt-2">
-                            {receiveAmount.toLocaleString(undefined, {
-                                minimumFractionDigits: 0,
-                                maximumFractionDigits: 2,
-                            })}
-                            <span className="text-xl sm:text-2xl ml-2 text-gray-500 font-normal">
-                                {cityConfig.currency}
-                            </span>
+                    {/* Divider with Rate Badge */}
+                    <div className="relative h-px bg-[#1A1F2B] mx-6">
+                        <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#242936] px-3 py-1 rounded-full border border-[#1A1F2B] flex items-center gap-2 text-xs text-gray-400">
+                            <ArrowDown className="w-3 h-3" />
+                            <span>1 USDT ≈ {rate.toFixed(2)} {cityConfig.currency}</span>
                         </div>
-                        <div className="text-xs text-gray-600 mt-3 flex justify-between items-center">
-                            <span>Rate: 1 USDT ≈ {rate.toFixed(2)} {cityConfig.currency}</span>
+                    </div>
+
+                    {/* Bottom Input: You Receive */}
+                    <div className="p-6 pt-4 space-y-2">
+                        <Label htmlFor="thb-input" className="text-gray-400 text-sm font-medium ml-1">You receive</Label>
+                        <div className="relative flex items-center bg-[#1A1F2B] rounded-2xl border border-transparent focus-within:border-white/20 transition-all">
+                            <Input
+                                id="thb-input"
+                                type="number"
+                                placeholder="0"
+                                value={receiveAmount}
+                                onChange={handleTHBChange}
+                                className="text-3xl font-bold bg-transparent border-none focus:ring-0 h-16 text-white placeholder:text-gray-700 w-full pl-4 pr-24"
+                            />
+                            <div className="absolute right-4 flex items-center gap-2 bg-[#242936] px-3 py-1.5 rounded-xl">
+                                <span className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center text-xs">🇹🇭</span>
+                                <span className="text-white font-bold">{cityConfig.currency}</span>
+                            </div>
                         </div>
+                    </div>
+
+                    {/* Transaction Details (Collapsible) */}
+                    <div className="px-6 pb-6">
+                        <button
+                            onClick={() => setIsDetailsOpen(!isDetailsOpen)}
+                            className="w-full flex items-center justify-between text-xs text-gray-500 hover:text-gray-300 transition-colors py-2"
+                        >
+                            <span className="flex items-center gap-1"><Info className="w-3 h-3" /> Transaction details</span>
+                            <span>{isDetailsOpen ? "Hide" : "Show"}</span>
+                        </button>
+
+                        <AnimatePresence>
+                            {isDetailsOpen && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    className="space-y-2 pt-2 overflow-hidden"
+                                >
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-gray-400">Service Fee</span>
+                                        <span className="text-green-400 font-medium">0 USDT</span>
+                                    </div>
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-gray-400">Delivery</span>
+                                        <span className="text-white font-medium">Included</span>
+                                    </div>
+                                    <div className="flex justify-between text-sm pt-2 border-t border-white/5">
+                                        <span className="text-gray-400">Total to Pay</span>
+                                        <span className="text-white font-bold">{amount || 0} USDT</span>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
                 </CardContent>
             </Card>
 
-            <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
-                <ShieldCheck className="w-3 h-3" />
+            <div className="flex items-center justify-center gap-2 text-xs text-gray-600">
+                <Check className="w-3 h-3 text-green-500" />
                 <span>Secured by Ex24.pro</span>
             </div>
         </div>
