@@ -1,4 +1,6 @@
 "use client";
+// Landing Page for CryptoCash
+
 
 import Link from 'next/link';
 import { locations } from '@/config/locations';
