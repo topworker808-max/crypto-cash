@@ -4,15 +4,16 @@ import { useState, useRef, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { i18n, type Locale } from '@/i18n/config';
 import { ChevronDown } from 'lucide-react';
+import { RussiaFlag, USAFlag, ChinaFlag } from './flags';
 
 interface LanguageSwitcherProps {
     currentLang: Locale;
 }
 
-const languages: Record<Locale, { flag: string; label: string; shortLabel: string }> = {
-    ru: { flag: '🇷🇺', label: 'Русский', shortLabel: 'RU' },
-    en: { flag: '🇺🇸', label: 'English', shortLabel: 'EN' },
-    zh: { flag: '🇨🇳', label: '中文', shortLabel: 'ZH' },
+const languages: Record<Locale, { Flag: React.ComponentType<{ className?: string }>; label: string; shortLabel: string }> = {
+    ru: { Flag: RussiaFlag, label: 'Русский', shortLabel: 'RU' },
+    en: { Flag: USAFlag, label: 'English', shortLabel: 'US' },
+    zh: { Flag: ChinaFlag, label: '中文', shortLabel: 'CN' },
 };
 
 export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
@@ -22,6 +23,7 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
     const router = useRouter();
 
     const currentLanguage = languages[currentLang];
+    const CurrentFlag = currentLanguage.Flag;
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -55,12 +57,12 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
 
     return (
         <div className="relative" ref={dropdownRef}>
-            {/* Trigger Button - Ex24 style */}
+            {/* Trigger Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="h-10 flex items-center gap-1.5 px-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                className="h-10 flex items-center gap-2 px-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
-                <span className="text-lg">{currentLanguage.flag}</span>
+                <CurrentFlag className="w-6 h-4 rounded-sm shadow-sm" />
                 <span className="font-medium text-gray-700 dark:text-gray-300 text-sm">
                     {currentLanguage.shortLabel}
                 </span>
@@ -76,6 +78,7 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
                 <div className="absolute right-0 top-full mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden min-w-[160px] z-50">
                     {i18n.locales.map((locale) => {
                         const lang = languages[locale];
+                        const LangFlag = lang.Flag;
                         const isActive = locale === currentLang;
 
                         return (
@@ -88,7 +91,10 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
                                         : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
                                 }`}
                             >
-                                <span className="text-xl">{lang.flag}</span>
+                                <LangFlag className="w-6 h-4 rounded-sm shadow-sm" />
+                                <span className="text-gray-500 dark:text-gray-400 text-sm">
+                                    {lang.shortLabel}
+                                </span>
                                 <span className={`font-medium ${
                                     isActive
                                         ? 'text-gray-900 dark:text-white'
