@@ -4,72 +4,41 @@
 
 @layer base {
   :root {
-    /* Deep Blue-Gray #1A1F2B -> HSL(222, 25%, 14%) */
-    --background: 222 25% 14%;
-    --foreground: 0 0% 100%;
-    /* White */
+    /* Ex24 Style - Light Gray Background #E6E6E6 */
+    --background: 0 0% 90%;
+    --foreground: 220 15% 20%;
+    /* Dark text */
 
-    /* Lighter Tone #242936 -> HSL(223, 20%, 18%) */
-    --card: 223 20% 18%;
-    --card-foreground: 0 0% 100%;
+    /* White cards with shadows */
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 20%;
 
-    --popover: 223 20% 18%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 20%;
 
-    --primary: 0 0% 100%;
-    /* White */
-    --primary-foreground: 222 25% 14%;
-    /* Deep Blue-Gray */
+    /* Yellow accent #FFD528 -> HSL(48, 100%, 58%) */
+    --primary: 48 100% 58%;
+    --primary-foreground: 220 15% 20%;
+    /* Dark text on yellow */
 
-    --secondary: 223 20% 18%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 220 15% 20%;
 
-    --muted: 223 20% 18%;
-    --muted-foreground: 218 11% 65%;
-    /* Light Gray #9CA3AF */
+    --muted: 0 0% 85%;
+    --muted-foreground: 220 10% 40%;
 
-    --accent: 223 20% 18%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 48 100% 58%;
+    --accent-foreground: 220 15% 20%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 223 20% 18%;
-    --input: 223 20% 18%;
-    --ring: 218 11% 65%;
+    --border: 0 0% 80%;
+    --input: 0 0% 100%;
+    --ring: 48 100% 58%;
 
-    --radius: 1rem;
-    /* 16px rounded-2xl */
-  }
-
-  .dark {
-    --background: 222 25% 14%;
-    --foreground: 0 0% 100%;
-
-    --card: 223 20% 18%;
-    --card-foreground: 0 0% 100%;
-
-    --popover: 223 20% 18%;
-    --popover-foreground: 0 0% 100%;
-
-    --primary: 0 0% 100%;
-    --primary-foreground: 222 25% 14%;
-
-    --secondary: 223 20% 18%;
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 223 20% 18%;
-    --muted-foreground: 218 11% 65%;
-
-    --accent: 223 20% 18%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 223 20% 18%;
-    --input: 223 20% 18%;
-    --ring: 218 11% 65%;
+    --radius: 0.75rem;
+    /* 12px rounded - Ex24 style */
   }
 }
 

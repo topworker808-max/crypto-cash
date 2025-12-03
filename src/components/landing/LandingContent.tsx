@@ -21,7 +21,7 @@ const cityNameKeys: Record<string, keyof Dictionary['landing']> = {
 
 export function LandingContent({ lang, dict }: LandingContentProps) {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-background text-foreground relative overflow-hidden">
+        <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-[#E6E6E6] text-gray-900 relative overflow-hidden">
             {/* Language Switcher */}
             <div className="absolute top-4 right-4 z-20">
                 <LanguageSwitcher currentLang={lang} />
@@ -34,10 +34,10 @@ export function LandingContent({ lang, dict }: LandingContentProps) {
                     transition={{ duration: 0.6 }}
                     className="space-y-4"
                 >
-                    <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight text-white drop-shadow-2xl">
-                        Crypto<span className="text-zinc-500">Cash</span>
+                    <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight text-gray-900">
+                        Crypto<span className="text-gray-500">Cash</span>
                     </h1>
-                    <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                         {dict.landing.subtitle}
                     </p>
                 </motion.div>
@@ -56,19 +56,19 @@ export function LandingContent({ lang, dict }: LandingContentProps) {
                             >
                                 <Link
                                     href={`/${lang}/${loc.slug}`}
-                                    className="group block p-8 border border-zinc-800 rounded-2xl bg-zinc-900/50 backdrop-blur-sm hover:border-white/20 hover:bg-zinc-900 transition-all duration-300"
+                                    className="group block p-8 border border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-lg hover:border-[#FFD528] transition-all duration-300"
                                 >
                                     <div className="flex items-center justify-between mb-4">
-                                        <div className="p-3 rounded-full bg-zinc-800 text-white group-hover:bg-white group-hover:text-black transition-colors">
+                                        <div className="p-3 rounded-full bg-gray-100 text-gray-700 group-hover:bg-[#FFD528] group-hover:text-gray-900 transition-colors">
                                             <MapPin className="w-6 h-6" />
                                         </div>
-                                        <ArrowRight className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors" />
+                                        <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-[#FFD528] transition-colors" />
                                     </div>
 
-                                    <h2 className="text-2xl font-bold text-white group-hover:text-white text-left">
+                                    <h2 className="text-2xl font-bold text-gray-900 text-left">
                                         {cityName}
                                     </h2>
-                                    <p className="mt-2 text-zinc-400 text-left text-sm">
+                                    <p className="mt-2 text-gray-500 text-left text-sm">
                                         USDT → {loc.currency}
                                     </p>
                                 </Link>

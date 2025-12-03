@@ -36,15 +36,15 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
     };
 
     return (
-        <div className="flex items-center gap-1 bg-zinc-800/50 rounded-lg p-1">
+        <div className="flex items-center gap-1 bg-white shadow-sm rounded-lg p-1">
             {i18n.locales.map((locale) => (
                 <button
                     key={locale}
                     onClick={() => switchLanguage(locale)}
                     className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                         locale === currentLang
-                            ? 'bg-white text-black'
-                            : 'text-zinc-400 hover:text-white'
+                            ? 'bg-[#FFD528] text-gray-900'
+                            : 'text-gray-500 hover:text-gray-900'
                     }`}
                 >
                     {langLabels[locale]}
