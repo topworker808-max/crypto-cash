@@ -57,8 +57,9 @@ export function middleware(request: NextRequest) {
         return NextResponse.next();
     }
 
-    // Determine locale: cookie > Accept-Language header > default
-    const locale = getLocaleFromCookie(request) || getLocaleFromHeaders(request);
+    // Determine locale: cookie > default (RU)
+    // We ignore Accept-Language header to always default to Russian
+    const locale = getLocaleFromCookie(request) || i18n.defaultLocale;
 
     // Redirect to locale-prefixed path
     const newUrl = new URL(`/${locale}${pathname}`, request.url);
