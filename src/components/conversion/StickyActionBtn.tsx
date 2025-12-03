@@ -10,11 +10,13 @@ import type { Dictionary } from "@/i18n/getDictionary";
 interface StickyActionBtnProps {
     cityConfig: CityConfig;
     receiveAmount: number | "";
+    sendAmount?: number | "";
+    sendCurrency?: string;
     lang?: string;
     dict?: Dictionary;
 }
 
-export function StickyActionBtn({ cityConfig, receiveAmount, lang = 'en', dict }: StickyActionBtnProps) {
+export function StickyActionBtn({ cityConfig, receiveAmount, sendAmount, sendCurrency = 'USDT', lang = 'en', dict }: StickyActionBtnProps) {
     const handleOrderClick = () => {
         const baseLink = cityConfig.affiliateLink || "https://qr.ex24.pro/pattayahelper";
 
@@ -33,18 +35,17 @@ export function StickyActionBtn({ cityConfig, receiveAmount, lang = 'en', dict }
         window.open(link, "_blank");
     };
 
-    const displayAmount = receiveAmount ? receiveAmount.toLocaleString() : "";
+    // Format send amount with currency
+    const displaySendAmount = sendAmount ? `${sendAmount.toLocaleString()} ${sendCurrency}` : "";
 
-    // Build CTA text
+    // Build CTA text - now shows source amount (USDT/RUB), not THB
     let ctaText: string;
-    if (displayAmount && dict?.cta.getAmount) {
-        ctaText = dict.cta.getAmount
-            .replace('{amount}', displayAmount)
-            .replace('{currency}', cityConfig.currency);
+    if (displaySendAmount && dict?.cta.getAmount) {
+        ctaText = dict.cta.getAmount.replace('{amount}', displaySendAmount);
     } else if (dict?.cta.getCash) {
         ctaText = dict.cta.getCash;
     } else {
-        ctaText = displayAmount ? `GET ${displayAmount} ${cityConfig.currency} NOW` : 'GET CASH NOW';
+        ctaText = displaySendAmount ? `Exchange ${displaySendAmount}` : 'Exchange Now';
     }
 
     return (

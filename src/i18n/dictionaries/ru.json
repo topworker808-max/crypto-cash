@@ -61,8 +61,8 @@
         "step3": "Получите наличные"
     },
     "cta": {
-        "getAmount": "Получить {amount} {currency}",
-        "getCash": "Перейти к обмену",
+        "getAmount": "Обменять {amount} в Ex24 →",
+        "getCash": "Обменять в Ex24 →",
         "learnMore": "Подробнее",
         "readyToExchange": "Готовы к обмену?"
     },

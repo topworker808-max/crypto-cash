@@ -61,8 +61,8 @@
         "step3": "Get your cash"
     },
     "cta": {
-        "getAmount": "Get {amount} {currency}",
-        "getCash": "Go to Exchange",
+        "getAmount": "Exchange {amount} at Ex24 →",
+        "getCash": "Exchange at Ex24 →",
         "learnMore": "Learn more",
         "readyToExchange": "Ready to exchange?"
     },

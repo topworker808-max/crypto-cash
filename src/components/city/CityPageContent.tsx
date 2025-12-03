@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { CityConfig } from '@/config/locations';
-import { Calculator } from '@/components/calculator/Calculator';
+import { Calculator, type SourceCurrency } from '@/components/calculator/Calculator';
 import { RateComparison } from '@/components/calculator/RateComparison';
 import { AtmLossCalculator } from '@/components/calculator/AtmLossCalculator';
 import { StickyActionBtn } from '@/components/conversion/StickyActionBtn';
@@ -28,9 +28,13 @@ interface CityPageContentProps {
 export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, dict }: CityPageContentProps) {
     const [amount, setAmount] = useState<number | "">("");
     const [receiveAmount, setReceiveAmount] = useState<number | "">("");
+    const [sourceCurrency, setSourceCurrency] = useState<SourceCurrency>('USDT');
 
     // Use the live rate combined with the location modifier
     const rate = initialRate * location.baseRateModifier;
+
+    // RUB to THB rate (approximately 0.38 THB per 1 RUB, or ~2.6 RUB per 1 THB)
+    const rubRate = 0.38;
 
     // Get city name in current language
     const cityNameKey = location.slug as keyof typeof dict.landing;
@@ -76,8 +80,11 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
                     onAmountChange={setAmount}
                     onReceiveAmountChange={setReceiveAmount}
                     rate={rate}
+                    rubRate={rubRate}
                     rateUpdatedAt={rateUpdatedAt}
                     dict={dict}
+                    sourceCurrency={sourceCurrency}
+                    onSourceCurrencyChange={setSourceCurrency}
                 />
 
                 {/* Rate Comparison Widget */}
@@ -175,7 +182,14 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
                 </div>
             </motion.div>
 
-            <StickyActionBtn cityConfig={location} receiveAmount={receiveAmount} lang={lang} dict={dict} />
+            <StickyActionBtn
+                cityConfig={location}
+                receiveAmount={receiveAmount}
+                sendAmount={amount}
+                sendCurrency={sourceCurrency}
+                lang={lang}
+                dict={dict}
+            />
         </main>
         </>
     );

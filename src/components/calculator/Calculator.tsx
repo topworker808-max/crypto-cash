@@ -19,6 +19,18 @@ function ThailandFlag({ className = "w-5 h-4" }: { className?: string }) {
     );
 }
 
+function RussiaFlag({ className = "w-5 h-4" }: { className?: string }) {
+    return (
+        <svg className={className} viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+            <rect width="900" height="200" fill="#FFFFFF"/>
+            <rect y="200" width="900" height="200" fill="#0039A6"/>
+            <rect y="400" width="900" height="200" fill="#D52B1E"/>
+        </svg>
+    );
+}
+
+export type SourceCurrency = 'USDT' | 'RUB';
+
 interface CalculatorProps {
     cityConfig: CityConfig;
     amount: number | "";
@@ -26,8 +38,11 @@ interface CalculatorProps {
     onAmountChange: (val: number | "") => void;
     onReceiveAmountChange: (val: number | "") => void;
     rate: number;
+    rubRate?: number; // RUB to THB rate
     rateUpdatedAt?: number;
     dict?: Dictionary;
+    sourceCurrency?: SourceCurrency;
+    onSourceCurrencyChange?: (currency: SourceCurrency) => void;
 }
 
 function formatTimeAgo(timestamp: number, lang: string): string {
@@ -47,13 +62,44 @@ function formatTimeAgo(timestamp: number, lang: string): string {
     return lang === 'ru' ? '1 час+ назад' : '1h+ ago';
 }
 
-export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, onReceiveAmountChange, rate, rateUpdatedAt, dict }: CalculatorProps) {
+export function Calculator({
+    cityConfig,
+    amount,
+    receiveAmount,
+    onAmountChange,
+    onReceiveAmountChange,
+    rate,
+    rubRate = 0.38, // Default RUB/THB rate (~2.6 RUB per 1 THB)
+    rateUpdatedAt,
+    dict,
+    sourceCurrency = 'USDT',
+    onSourceCurrencyChange
+}: CalculatorProps) {
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    const [internalCurrency, setInternalCurrency] = useState<SourceCurrency>(sourceCurrency);
+
+    const currentCurrency = onSourceCurrencyChange ? sourceCurrency : internalCurrency;
+    const setCurrentCurrency = onSourceCurrencyChange || setInternalCurrency;
 
     // Determine language from dict
     const lang = dict?.common?.siteName ? (dict.landing.pattaya === 'Паттайя' ? 'ru' : 'en') : 'en';
 
-    const handleUSDTChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Current rate based on selected currency
+    const currentRate = currentCurrency === 'USDT' ? rate : rubRate;
+
+    // Preset amounts based on currency
+    const presets = currentCurrency === 'USDT'
+        ? [100, 500, 1000, 5000]
+        : [10000, 50000, 100000, 500000];
+
+    const formatPreset = (preset: number) => {
+        if (currentCurrency === 'RUB') {
+            return preset >= 1000 ? `${preset / 1000}k` : preset;
+        }
+        return preset >= 1000 ? `${preset / 1000}k` : preset;
+    };
+
+    const handleSourceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value;
         if (val === "") {
             onAmountChange("");
@@ -63,7 +109,7 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
         const num = parseFloat(val);
         if (!isNaN(num) && num >= 0) {
             onAmountChange(num);
-            onReceiveAmountChange(parseFloat((num * rate).toFixed(2)));
+            onReceiveAmountChange(parseFloat((num * currentRate).toFixed(2)));
         }
     };
 
@@ -77,7 +123,16 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
         const num = parseFloat(val);
         if (!isNaN(num) && num >= 0) {
             onReceiveAmountChange(num);
-            onAmountChange(parseFloat((num / rate).toFixed(2)));
+            onAmountChange(parseFloat((num / currentRate).toFixed(2)));
+        }
+    };
+
+    const handleCurrencySwitch = (currency: SourceCurrency) => {
+        setCurrentCurrency(currency);
+        // Recalculate amounts with new rate
+        if (amount && typeof amount === 'number') {
+            const newRate = currency === 'USDT' ? rate : rubRate;
+            onReceiveAmountChange(parseFloat((amount * newRate).toFixed(2)));
         }
     };
 
@@ -85,33 +140,74 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
         <div className="space-y-4 w-full max-w-md mx-auto">
             <Card className="w-full bg-white border-none shadow-lg rounded-xl overflow-hidden">
                 <CardContent className="p-0">
+                    {/* Currency Switcher */}
+                    <div className="p-4 pb-0">
+                        <div className="flex bg-gray-100 rounded-xl p-1">
+                            <button
+                                type="button"
+                                onClick={() => handleCurrencySwitch('USDT')}
+                                className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all ${
+                                    currentCurrency === 'USDT'
+                                        ? 'bg-white text-gray-900 shadow-sm'
+                                        : 'text-gray-500 hover:text-gray-700'
+                                }`}
+                            >
+                                <span className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center text-xs">₮</span>
+                                USDT
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => handleCurrencySwitch('RUB')}
+                                className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all ${
+                                    currentCurrency === 'RUB'
+                                        ? 'bg-white text-gray-900 shadow-sm'
+                                        : 'text-gray-500 hover:text-gray-700'
+                                }`}
+                            >
+                                <RussiaFlag className="w-5 h-3.5 rounded-sm" />
+                                RUB
+                            </button>
+                        </div>
+                    </div>
+
                     {/* Top Input: You Send */}
                     <div className="p-5 pb-3 space-y-2 relative">
-                        <Label htmlFor="usdt-input" className="text-gray-500 text-sm font-medium ml-1">{dict?.calculator.youSend || 'You send'}</Label>
+                        <Label htmlFor="source-input" className="text-gray-500 text-sm font-medium ml-1">
+                            {dict?.calculator.youSend || 'You send'}
+                        </Label>
                         <div className="relative flex items-center bg-gray-100 rounded-xl border border-gray-200 focus-within:border-[#FFD528] focus-within:ring-2 focus-within:ring-[#FFD528]/20 transition-all">
                             <Input
-                                id="usdt-input"
+                                id="source-input"
                                 type="number"
                                 placeholder="0"
                                 value={amount}
-                                onChange={handleUSDTChange}
+                                onChange={handleSourceChange}
                                 className="text-3xl font-bold bg-transparent border-none focus:ring-0 h-14 text-gray-900 placeholder:text-gray-400 w-full pl-4 pr-24"
                             />
                             <div className="absolute right-3 flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg shadow-sm">
-                                <span className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center text-xs">₮</span>
-                                <span className="text-gray-900 font-bold text-sm">USDT</span>
+                                {currentCurrency === 'USDT' ? (
+                                    <>
+                                        <span className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center text-xs">₮</span>
+                                        <span className="text-gray-900 font-bold text-sm">USDT</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <RussiaFlag className="w-5 h-3.5 rounded-sm" />
+                                        <span className="text-gray-900 font-bold text-sm">RUB</span>
+                                    </>
+                                )}
                             </div>
                         </div>
 
                         {/* Preset Amount Buttons */}
                         <div className="flex gap-2 pt-1">
-                            {[100, 500, 1000, 5000].map((preset) => (
+                            {presets.map((preset) => (
                                 <button
                                     key={preset}
                                     type="button"
                                     onClick={() => {
                                         onAmountChange(preset);
-                                        onReceiveAmountChange(parseFloat((preset * rate).toFixed(2)));
+                                        onReceiveAmountChange(parseFloat((preset * currentRate).toFixed(2)));
                                     }}
                                     className={`flex-1 py-1.5 px-2 text-sm font-medium rounded-lg transition-all ${
                                         amount === preset
@@ -119,7 +215,7 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                     }`}
                                 >
-                                    {preset >= 1000 ? `${preset / 1000}k` : preset}
+                                    {formatPreset(preset)}
                                 </button>
                             ))}
                         </div>
@@ -139,14 +235,16 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                             </span>
                             <span className="text-xs text-gray-600 font-medium">
-                                1 USDT ≈ {rate.toFixed(2)} {cityConfig.currency}
+                                1 {currentCurrency} ≈ {currentRate.toFixed(2)} {cityConfig.currency}
                             </span>
                         </div>
                     </div>
 
                     {/* Bottom Input: You Receive */}
                     <div className="p-5 pt-3 space-y-2">
-                        <Label htmlFor="thb-input" className="text-gray-500 text-sm font-medium ml-1">{dict?.calculator.youReceive || 'You receive'}</Label>
+                        <Label htmlFor="thb-input" className="text-gray-500 text-sm font-medium ml-1">
+                            {dict?.calculator.youReceive || 'You receive'}
+                        </Label>
                         <div className="relative flex items-center bg-gray-100 rounded-xl border border-gray-200 focus-within:border-[#FFD528] focus-within:ring-2 focus-within:ring-[#FFD528]/20 transition-all">
                             <Input
                                 id="thb-input"
@@ -169,7 +267,9 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                             onClick={() => setIsDetailsOpen(!isDetailsOpen)}
                             className="w-full flex items-center justify-between text-xs text-gray-500 hover:text-gray-700 transition-colors py-2"
                         >
-                            <span className="flex items-center gap-1"><Info className="w-3 h-3" /> {dict?.calculator.showDetails || 'Transaction details'}</span>
+                            <span className="flex items-center gap-1">
+                                <Info className="w-3 h-3" /> {dict?.calculator.showDetails || 'Transaction details'}
+                            </span>
                             <span>{isDetailsOpen ? (dict?.calculator.hideDetails || "Hide") : (lang === 'ru' ? 'Показать' : 'Show')}</span>
                         </button>
 
@@ -191,7 +291,7 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                                     </div>
                                     <div className="flex justify-between text-sm pt-2 border-t border-gray-200">
                                         <span className="text-gray-500">{dict?.calculator.totalToPay || 'Total to Pay'}</span>
-                                        <span className="text-gray-900 font-bold">{amount || 0} USDT</span>
+                                        <span className="text-gray-900 font-bold">{amount || 0} {currentCurrency}</span>
                                     </div>
                                 </motion.div>
                             )}

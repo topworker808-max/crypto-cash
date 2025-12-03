@@ -61,8 +61,8 @@
         "step3": "获取现金"
     },
     "cta": {
-        "getAmount": "获取 {amount} {currency}",
-        "getCash": "前往兑换",
+        "getAmount": "在Ex24兑换 {amount} →",
+        "getCash": "在Ex24兑换 →",
         "learnMore": "了解更多",
         "readyToExchange": "准备好兑换了吗？"
     },
