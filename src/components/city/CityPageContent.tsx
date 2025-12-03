@@ -62,7 +62,7 @@ export function CityPageContent({ location, initialRate, initialRubRate = 0.38, 
                     <ThemeToggle />
 
                     {/* Logo - Center */}
-                    <Logo className="h-9 sm:h-10" />
+                    <Logo className="h-12 sm:h-14" />
 
                     {/* Language Switcher - Right */}
                     <LanguageSwitcher currentLang={lang} />
