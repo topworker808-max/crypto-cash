@@ -34,27 +34,29 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
     const cityName = dict.landing[cityNameKey] || location.displayName;
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-start pt-12 p-4 pb-40 bg-[#E6E6E6] dark:bg-gray-900 text-gray-900 dark:text-gray-100 relative overflow-hidden transition-colors">
-            {/* Theme Toggle - Left */}
-            <div className="absolute top-4 left-4 z-20">
-                <ThemeToggle />
-            </div>
-
-            {/* Language Switcher - Right */}
-            <div className="absolute top-4 right-4 z-20">
-                <LanguageSwitcher currentLang={lang} />
-            </div>
-
+        <main className="flex min-h-screen flex-col items-center justify-start pt-6 p-4 pb-40 bg-[#E6E6E6] dark:bg-gray-900 text-gray-900 dark:text-gray-100 relative overflow-hidden transition-colors">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 className="max-w-md w-full text-center space-y-8 relative z-10"
             >
-                <div className="space-y-2">
-                    <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        CryptoCash <span className="text-gray-500 dark:text-gray-400">{cityName}</span>
+                {/* Header with controls - like Ex24.pro */}
+                <div className="flex items-center justify-between w-full px-2">
+                    {/* Theme Toggle - Left */}
+                    <ThemeToggle />
+
+                    {/* Logo/Title - Center */}
+                    <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        CryptoCash
                     </h1>
+
+                    {/* Language Switcher - Right */}
+                    <LanguageSwitcher currentLang={lang} />
+                </div>
+
+                {/* Subtitle */}
+                <div className="space-y-1 -mt-4">
                     <p className="text-base text-gray-600 dark:text-gray-400">
                         {dict.calculator.title}. {dict.calculator.subtitle.replace('{currency}', location.currency)}
                     </p>

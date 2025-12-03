@@ -9,7 +9,6 @@ export function ThemeToggle() {
     const [theme, setTheme] = useState<Theme>('light');
     const [mounted, setMounted] = useState(false);
 
-    // On mount, check for saved theme or system preference
     useEffect(() => {
         setMounted(true);
         const savedTheme = localStorage.getItem('theme') as Theme | null;
@@ -27,14 +26,13 @@ export function ThemeToggle() {
         document.documentElement.classList.toggle('dark', newTheme === 'dark');
     };
 
-    // Prevent hydration mismatch
     if (!mounted) {
         return (
             <button
-                className="p-2.5 rounded-lg bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700"
+                className="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
                 aria-label="Toggle theme"
             >
-                <Sun className="w-5 h-5 text-gray-500" />
+                <Sun className="w-5 h-5 text-gray-400" strokeWidth={1.5} />
             </button>
         );
     }
@@ -42,13 +40,13 @@ export function ThemeToggle() {
     return (
         <button
             onClick={toggleTheme}
-            className="p-2.5 rounded-lg bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700"
+            className="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
         >
             {theme === 'light' ? (
-                <Sun className="w-5 h-5 text-amber-500" />
+                <Sun className="w-5 h-5 text-gray-500" strokeWidth={1.5} />
             ) : (
-                <Moon className="w-5 h-5 text-blue-400" />
+                <Moon className="w-5 h-5 text-gray-400" strokeWidth={1.5} />
             )}
         </button>
     );

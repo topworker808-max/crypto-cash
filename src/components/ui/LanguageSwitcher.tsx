@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { i18n, type Locale } from '@/i18n/config';
-import { ChevronUp } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 interface LanguageSwitcherProps {
     currentLang: Locale;
@@ -23,7 +23,6 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
 
     const currentLanguage = languages[currentLang];
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -40,7 +39,6 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
             return;
         }
 
-        // Replace current lang prefix with new lang
         const segments = pathname.split('/');
         if (segments[1] && i18n.locales.includes(segments[1] as Locale)) {
             segments[1] = newLang;
@@ -49,8 +47,6 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
         }
 
         const newPath = segments.join('/') || '/';
-
-        // Set cookie for persistence
         document.cookie = `NEXT_LOCALE=${newLang};path=/;max-age=31536000`;
 
         setIsOpen(false);
@@ -59,18 +55,18 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
 
     return (
         <div className="relative" ref={dropdownRef}>
-            {/* Trigger Button */}
+            {/* Trigger Button - Ex24 style */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700"
+                className="h-10 flex items-center gap-1.5 px-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
-                <span className="text-base">{currentLanguage.flag}</span>
-                <span className="font-medium text-gray-900 dark:text-white text-sm">
+                <span className="text-lg">{currentLanguage.flag}</span>
+                <span className="font-medium text-gray-700 dark:text-gray-300 text-sm">
                     {currentLanguage.shortLabel}
                 </span>
-                <ChevronUp
-                    className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
-                        isOpen ? 'rotate-0' : 'rotate-180'
+                <ChevronDown
+                    className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+                        isOpen ? 'rotate-180' : ''
                     }`}
                 />
             </button>
