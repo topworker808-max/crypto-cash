@@ -61,8 +61,8 @@
         "step3": "Получите наличные"
     },
     "cta": {
-        "getAmount": "Узнать курс на {amount} {currency}",
-        "getCash": "Узнать актуальный курс",
+        "getAmount": "Получить {amount} {currency}",
+        "getCash": "Перейти к обмену",
         "learnMore": "Подробнее",
         "readyToExchange": "Готовы к обмену?"
     },

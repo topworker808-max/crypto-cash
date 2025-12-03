@@ -61,8 +61,8 @@
         "step3": "Get your cash"
     },
     "cta": {
-        "getAmount": "Check rate for {amount} {currency}",
-        "getCash": "Check current rate",
+        "getAmount": "Get {amount} {currency}",
+        "getCash": "Go to Exchange",
         "learnMore": "Learn more",
         "readyToExchange": "Ready to exchange?"
     },
