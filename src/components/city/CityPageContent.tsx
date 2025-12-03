@@ -48,7 +48,7 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
 
                     {/* Logo/Title - Center */}
                     <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        CryptoCash
+                        Crypto2Baht
                     </h1>
 
                     {/* Language Switcher - Right */}

@@ -1,6 +1,6 @@
 export const i18n = {
     defaultLocale: 'ru',
-    locales: ['ru', 'en', 'zh'],
+    locales: ['ru', 'en', 'zh'],  // Order: Russian first, then English, then Chinese
 } as const;
 
 export type Locale = (typeof i18n)['locales'][number];

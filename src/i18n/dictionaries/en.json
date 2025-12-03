@@ -1,11 +1,11 @@
 {
     "common": {
-        "siteName": "CryptoCash",
+        "siteName": "Crypto2Baht",
         "tagline": "Crypto Exchange in Thailand"
     },
     "landing": {
         "title": "Crypto Exchange",
-        "subtitle": "Best USDT to THB rates from official partner Ex24.pro",
+        "subtitle": "Best USDT → THB rates from partner Ex24.pro",
         "selectLocation": "Select your city",
         "pattaya": "Pattaya",
         "phuket": "Phuket"
@@ -64,24 +64,24 @@
         "readyToExchange": "Ready to exchange?"
     },
     "faq": {
-        "title": "FAQ",
-        "q1": "What is CryptoCash?",
-        "a1": "CryptoCash is a calculator for crypto-to-cash exchange in Thailand. The actual exchange is done by our partner Ex24.pro.",
-        "q2": "Who handles the exchange?",
-        "a2": "Exchange is handled by Ex24.pro — a licensed exchanger with offices across Thailand. We just help you calculate savings.",
-        "q3": "What's the min/max amount?",
-        "a3": "Minimum 100 USDT. Maximum depends on partner availability (usually up to 50,000 USDT).",
-        "q4": "How long does it take?",
-        "a4": "From 30 minutes to 2 hours depending on amount and your location.",
-        "q5": "What documents are needed?",
-        "a5": "Passport or ID for verification. Required by partner Ex24.pro."
+        "title": "Frequently Asked Questions",
+        "q1": "What currency should I bring to Thailand?",
+        "a1": "We recommend bringing USDT cryptocurrency — it's safe and profitable. Through our partner Ex24, you'll get the best exchange rate for Thai Baht without hidden fees.",
+        "q2": "Can I order cash delivery?",
+        "a2": "Yes, partner Ex24 delivers cash by courier — to the airport on arrival, to your hotel, or any convenient location. Check delivery terms and cost with Ex24 manager.",
+        "q3": "Do I need to visit an office for exchange?",
+        "a3": "No, it's not required. You can withdraw cash at any ATM using QR code without a card, or order delivery. Ex24 offers convenient online solutions.",
+        "q4": "How to exchange safely?",
+        "a4": "Exchange through Ex24 is completely safe — it's a licensed exchanger with offices throughout Thailand. Use only official contacts on ex24.pro.",
+        "q5": "What's the minimum and maximum amount?",
+        "a5": "Minimum amount is 100 USDT. Maximum depends on partner availability, usually up to 50,000 USDT. For large amounts, better to check in advance."
     },
     "footer": {
         "poweredBy": "Rates by Ex24.pro",
         "disclaimer": "Exchange by Ex24.pro"
     },
     "meta": {
-        "title": "USDT Exchange in Thailand | CryptoCash",
+        "title": "USDT to Baht Exchange in Thailand | Crypto2Baht",
         "description": "USDT to Thai Baht calculator. Best rates from partner Ex24.pro. Compare with banks and ATMs."
     }
 }
