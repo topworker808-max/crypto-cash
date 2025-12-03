@@ -4,9 +4,9 @@ import { Metadata } from 'next';
 import { CityPageContent } from '@/components/city/CityPageContent';
 
 interface CityPageProps {
-    params: {
+    params: Promise<{
         city: string;
-    };
+    }>;
 }
 
 // 1. Generate Static Params for SSG
@@ -18,8 +18,8 @@ export async function generateStaticParams() {
 
 // 2. Dynamic Metadata
 export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
-    const citySlug = params.city;
-    const location = locations.find((loc) => loc.slug === citySlug);
+    const { city } = await params;
+    const location = locations.find((loc) => loc.slug === city);
 
     if (!location) {
         return {
@@ -34,9 +34,9 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
 }
 
 // 3. Page Component
-export default function CityPage({ params }: CityPageProps) {
-    const citySlug = params.city;
-    const location = locations.find((loc) => loc.slug === citySlug);
+export default async function CityPage({ params }: CityPageProps) {
+    const { city } = await params;
+    const location = locations.find((loc) => loc.slug === city);
 
     if (!location) {
         notFound();
