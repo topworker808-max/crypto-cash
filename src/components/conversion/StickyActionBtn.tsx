@@ -26,10 +26,10 @@ export function StickyActionBtn({ cityConfig }: StickyActionBtnProps) {
                 <Button
                     onClick={handleOrderClick}
                     size="lg"
-                    className="w-full h-16 text-xl font-bold uppercase tracking-wider bg-white hover:bg-zinc-200 text-black border-none rounded-xl shadow-lg transition-all duration-300"
+                    className="w-full h-14 text-lg font-bold uppercase tracking-wide bg-white hover:bg-gray-100 text-[#1A1F2B] border-none rounded-2xl shadow-lg transition-all duration-300"
                 >
-                    <span className="mr-2">ПЕРЕЙТИ К ОБМЕНУ</span>
-                    <ArrowRight className="w-6 h-6" />
+                    <span className="mr-2">CONTINUE TO EXCHANGE</span>
+                    <ArrowRight className="w-5 h-5" />
                 </Button>
             </motion.div>
         </div>

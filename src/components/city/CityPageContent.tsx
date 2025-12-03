@@ -20,11 +20,11 @@ export function CityPageContent({ location }: CityPageContentProps) {
                 className="max-w-md w-full text-center space-y-8 relative z-10"
             >
                 <div className="space-y-2">
-                    <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                        CryptoCash <span className="text-zinc-500">{location.displayName}</span>
+                    <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                        CryptoCash <span className="text-gray-500">{location.displayName}</span>
                     </h1>
-                    <p className="text-lg text-zinc-400">
-                        Fastest USDT to {location.currency} delivery.
+                    <p className="text-base text-gray-400">
+                        Official USDT to {location.currency} Exchange Rate Calculator.
                     </p>
                 </div>
 
