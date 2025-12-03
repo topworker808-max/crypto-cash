@@ -9,6 +9,11 @@ interface CoinGeckoResponse {
     };
 }
 
+export interface RateData {
+    rate: number;
+    updatedAt: number; // Unix timestamp in ms
+}
+
 export const getLiveRate = unstable_cache(
     async (): Promise<number> => {
         try {
@@ -39,5 +44,17 @@ export const getLiveRate = unstable_cache(
         }
     },
     ['usdt-thb-rate'],
+    { revalidate: 60 }
+);
+
+export const getLiveRateWithTimestamp = unstable_cache(
+    async (): Promise<RateData> => {
+        const rate = await getLiveRate();
+        return {
+            rate,
+            updatedAt: Date.now(),
+        };
+    },
+    ['usdt-thb-rate-with-timestamp'],
     { revalidate: 60 }
 );

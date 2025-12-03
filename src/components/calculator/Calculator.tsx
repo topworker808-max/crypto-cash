@@ -16,11 +16,32 @@ interface CalculatorProps {
     onAmountChange: (val: number | "") => void;
     onReceiveAmountChange: (val: number | "") => void;
     rate: number;
+    rateUpdatedAt?: number;
     dict?: Dictionary;
 }
 
-export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, onReceiveAmountChange, rate, dict }: CalculatorProps) {
+function formatTimeAgo(timestamp: number, lang: string): string {
+    const now = Date.now();
+    const diffMs = now - timestamp;
+    const diffMin = Math.floor(diffMs / 60000);
+
+    if (diffMin < 1) {
+        return lang === 'ru' ? 'только что' : 'just now';
+    }
+    if (diffMin === 1) {
+        return lang === 'ru' ? '1 мин назад' : '1 min ago';
+    }
+    if (diffMin < 60) {
+        return lang === 'ru' ? `${diffMin} мин назад` : `${diffMin} min ago`;
+    }
+    return lang === 'ru' ? '1 час+ назад' : '1h+ ago';
+}
+
+export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, onReceiveAmountChange, rate, rateUpdatedAt, dict }: CalculatorProps) {
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+    // Determine language from dict
+    const lang = dict?.common?.siteName ? (dict.landing.pattaya === 'Паттайя' ? 'ru' : 'en') : 'en';
 
     const handleUSDTChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value;
@@ -70,6 +91,27 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
                                 <span className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center text-xs">₮</span>
                                 <span className="text-gray-900 font-bold text-sm">USDT</span>
                             </div>
+                        </div>
+
+                        {/* Preset Amount Buttons */}
+                        <div className="flex gap-2 pt-1">
+                            {[100, 500, 1000, 5000].map((preset) => (
+                                <button
+                                    key={preset}
+                                    type="button"
+                                    onClick={() => {
+                                        onAmountChange(preset);
+                                        onReceiveAmountChange(parseFloat((preset * rate).toFixed(2)));
+                                    }}
+                                    className={`flex-1 py-1.5 px-2 text-sm font-medium rounded-lg transition-all ${
+                                        amount === preset
+                                            ? 'bg-[#FFD528] text-gray-900 shadow-sm'
+                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                    }`}
+                                >
+                                    {preset >= 1000 ? `${preset / 1000}k` : preset}
+                                </button>
+                            ))}
                         </div>
                     </div>
 
@@ -149,6 +191,14 @@ export function Calculator({ cityConfig, amount, receiveAmount, onAmountChange, 
             </Card>
 
             <div className="flex flex-col items-center justify-center gap-1 text-xs text-gray-500">
+                {rateUpdatedAt && (
+                    <div className="flex items-center gap-1.5 text-gray-400">
+                        <span className="relative flex h-1.5 w-1.5">
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+                        </span>
+                        <span>{lang === 'ru' ? 'Курс обновлён' : 'Rate updated'}: {formatTimeAgo(rateUpdatedAt, lang)}</span>
+                    </div>
+                )}
                 <div className="flex items-center gap-2">
                     <Check className="w-3 h-3 text-green-600" />
                     <span>{dict?.footer.poweredBy || 'Rates powered by licensed partner'}</span>

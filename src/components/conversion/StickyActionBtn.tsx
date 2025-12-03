@@ -53,12 +53,15 @@ export function StickyActionBtn({ cityConfig, receiveAmount, lang = 'en', dict }
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-                className="w-full max-w-md mx-auto"
+                className="w-full max-w-md mx-auto space-y-2"
             >
+                <p className="text-center text-sm text-gray-600">
+                    {dict?.cta.readyToExchange || "Ready to exchange?"}
+                </p>
                 <Button
                     onClick={handleOrderClick}
                     size="lg"
-                    className="w-full h-14 text-lg font-bold uppercase tracking-wide bg-[#FFD528] hover:bg-[#E5BF24] text-gray-900 border-none rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full h-14 text-lg font-semibold bg-[#FFD528] hover:bg-[#E5BF24] text-gray-900 border-none rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                     <span className="mr-2">{ctaText}</span>
                     <ArrowRight className="w-5 h-5" />

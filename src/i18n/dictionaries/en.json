@@ -58,9 +58,10 @@
         "step3": "Courier delivers cash"
     },
     "cta": {
-        "getAmount": "GET {amount} {currency} NOW",
-        "getCash": "GET CASH NOW",
-        "learnMore": "Learn More"
+        "getAmount": "Exchange for {amount} {currency}",
+        "getCash": "Go to Partner",
+        "learnMore": "Learn More",
+        "readyToExchange": "Ready to exchange?"
     },
     "faq": {
         "title": "Frequently Asked Questions",

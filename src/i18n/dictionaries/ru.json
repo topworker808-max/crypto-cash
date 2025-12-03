@@ -58,9 +58,10 @@
         "step3": "Курьер привезёт деньги"
     },
     "cta": {
-        "getAmount": "ПОЛУЧИТЬ {amount} {currency}",
-        "getCash": "ПОЛУЧИТЬ НАЛИЧНЫЕ",
-        "learnMore": "Подробнее"
+        "getAmount": "Обменять {amount} {currency}",
+        "getCash": "Перейти к партнёру",
+        "learnMore": "Подробнее",
+        "readyToExchange": "Готов обменять?"
     },
     "faq": {
         "title": "Частые вопросы",

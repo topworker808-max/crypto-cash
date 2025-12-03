@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { locations } from '@/config/locations';
 import { Metadata } from 'next';
 import { CityPageContent } from '@/components/city/CityPageContent';
-import { getLiveRate } from '@/lib/rate-service';
+import { getLiveRateWithTimestamp } from '@/lib/rate-service';
 import { i18n, type Locale, isValidLocale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
 
@@ -81,15 +81,16 @@ export default async function CityPage({ params }: CityPageProps) {
         notFound();
     }
 
-    const [liveRate, dict] = await Promise.all([
-        getLiveRate(),
+    const [rateData, dict] = await Promise.all([
+        getLiveRateWithTimestamp(),
         getDictionary(lang as Locale),
     ]);
 
     return (
         <CityPageContent
             location={location}
-            initialRate={liveRate}
+            initialRate={rateData.rate}
+            rateUpdatedAt={rateData.updatedAt}
             lang={lang as Locale}
             dict={dict}
         />

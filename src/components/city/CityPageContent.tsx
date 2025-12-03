@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { CityConfig } from '@/config/locations';
 import { Calculator } from '@/components/calculator/Calculator';
 import { RateComparison } from '@/components/calculator/RateComparison';
+import { AtmLossCalculator } from '@/components/calculator/AtmLossCalculator';
 import { StickyActionBtn } from '@/components/conversion/StickyActionBtn';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+import { FAQ } from '@/components/faq/FAQ';
 import { motion } from 'framer-motion';
 import { Calculator as CalcIcon, MessageCircle, Banknote, ShieldCheck, TrendingUp, Wallet } from 'lucide-react';
 import type { Locale } from '@/i18n/config';
@@ -14,11 +16,12 @@ import type { Dictionary } from '@/i18n/getDictionary';
 interface CityPageContentProps {
     location: CityConfig;
     initialRate: number;
+    rateUpdatedAt?: number;
     lang: Locale;
     dict: Dictionary;
 }
 
-export function CityPageContent({ location, initialRate, lang, dict }: CityPageContentProps) {
+export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, dict }: CityPageContentProps) {
     const [amount, setAmount] = useState<number | "">("");
     const [receiveAmount, setReceiveAmount] = useState<number | "">("");
 
@@ -58,6 +61,7 @@ export function CityPageContent({ location, initialRate, lang, dict }: CityPageC
                     onAmountChange={setAmount}
                     onReceiveAmountChange={setReceiveAmount}
                     rate={rate}
+                    rateUpdatedAt={rateUpdatedAt}
                     dict={dict}
                 />
 
@@ -68,6 +72,16 @@ export function CityPageContent({ location, initialRate, lang, dict }: CityPageC
                     rate={rate}
                     dict={dict}
                 />
+
+                {/* ATM Loss Calculator */}
+                {typeof amount === 'number' && amount >= 100 && (
+                    <AtmLossCalculator
+                        cityConfig={location}
+                        amount={amount}
+                        rate={rate}
+                        dict={dict}
+                    />
+                )}
 
                 {/* SEO Content Block: Why Exchange? */}
                 <div className="pt-6 space-y-4 text-left">
@@ -121,6 +135,9 @@ export function CityPageContent({ location, initialRate, lang, dict }: CityPageC
                         </div>
                     </div>
                 </div>
+
+                {/* FAQ Section */}
+                <FAQ dict={dict} />
             </motion.div>
 
             <StickyActionBtn cityConfig={location} receiveAmount={receiveAmount} lang={lang} dict={dict} />
