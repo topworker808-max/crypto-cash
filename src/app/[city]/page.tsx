@@ -9,14 +9,14 @@ interface CityPageProps {
     };
 }
 
-// 1. Generate Static Params for SSG (SEO + Performance)
+// 1. Generate Static Params for SSG
 export async function generateStaticParams() {
     return locations.map((loc) => ({
         city: loc.slug,
     }));
 }
 
-// 2. Dynamic Metadata for SEO
+// 2. Dynamic Metadata
 export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
     const citySlug = params.city;
     const location = locations.find((loc) => loc.slug === citySlug);
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     };
 }
 
-// 3. The Page Component (Server Side)
+// 3. Page Component
 export default function CityPage({ params }: CityPageProps) {
     const citySlug = params.city;
     const location = locations.find((loc) => loc.slug === citySlug);
