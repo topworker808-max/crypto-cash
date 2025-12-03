@@ -58,7 +58,7 @@ export function CityPageContent({ location, initialRate, rateUpdatedAt, lang, di
                 {/* Subtitle */}
                 <div className="space-y-1 -mt-4">
                     <p className="text-base text-gray-600 dark:text-gray-400">
-                        {dict.calculator.title}. {dict.calculator.subtitle.replace('{currency}', location.currency)}
+                        {dict.landing.subtitle}
                     </p>
                 </div>
 

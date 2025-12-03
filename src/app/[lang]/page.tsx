@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import { i18n, type Locale, isValidLocale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
-import { LandingContent } from '@/components/landing/LandingContent';
+import { CityPageContent } from '@/components/city/CityPageContent';
+import { DEFAULT_LOCATION } from '@/config/locations';
+import { getLiveRateWithTimestamp } from '@/lib/rate-service';
 import { notFound } from 'next/navigation';
 
 interface LangPageProps {
@@ -26,6 +28,7 @@ export async function generateMetadata({ params }: LangPageProps): Promise<Metad
             languages: {
                 'en': '/en',
                 'ru': '/ru',
+                'zh': '/zh',
             },
         },
     };
@@ -35,7 +38,18 @@ export default async function LangPage({ params }: LangPageProps) {
     const { lang } = await params;
     if (!isValidLocale(lang)) notFound();
 
-    const dict = await getDictionary(lang as Locale);
+    const [rateData, dict] = await Promise.all([
+        getLiveRateWithTimestamp(),
+        getDictionary(lang as Locale),
+    ]);
 
-    return <LandingContent lang={lang as Locale} dict={dict} />;
+    return (
+        <CityPageContent
+            location={DEFAULT_LOCATION}
+            initialRate={rateData.rate}
+            rateUpdatedAt={rateData.updatedAt}
+            lang={lang as Locale}
+            dict={dict}
+        />
+    );
 }
